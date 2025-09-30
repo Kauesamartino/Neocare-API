@@ -1,0 +1,71 @@
+package com.neocare.api.interfaces.mapper;
+
+import com.neocare.api.domain.model.Endereco;
+import com.neocare.api.domain.model.Usuario;
+import com.neocare.api.interfaces.dto.input.UsuarioInputDTO;
+import com.neocare.api.interfaces.dto.output.EnderecoOutputDTO;
+import com.neocare.api.interfaces.dto.output.UsuarioOutputDTO;
+
+public final class UsuarioMapper {
+    private UsuarioMapper() {
+        super();
+    }
+
+    public static Usuario toModel(UsuarioInputDTO dto) {
+        Endereco endereco = toEnderecoModel(
+                dto.endereco().logradouro(),
+                dto.endereco().bairro(),
+                dto.endereco().cep(),
+                dto.endereco().numero(),
+                dto.endereco().complemento(),
+                dto.endereco().cidade(),
+                dto.endereco().uf()
+        );
+
+        return new Usuario(
+                dto.nome(),
+                dto.sobrenome(),
+                dto.cpf(),
+                dto.email(),
+                dto.telefone(),
+                dto.dataNascimento(),
+                dto.sexo(),
+                dto.altura(),
+                dto.peso(),
+                endereco
+        );
+    }
+
+    public static UsuarioOutputDTO toOutputDTO(Usuario usuario) {
+        EnderecoOutputDTO enderecoOutputDTO = new EnderecoOutputDTO(
+                usuario.getEndereco().getLogradouro(),
+                usuario.getEndereco().getBairro(),
+                usuario.getEndereco().getCep(),
+                usuario.getEndereco().getNumero(),
+                usuario.getEndereco().getComplemento(),
+                usuario.getEndereco().getCidade(),
+                usuario.getEndereco().getUf()
+        );
+
+        return new UsuarioOutputDTO(
+                usuario.getId(),
+                usuario.getNome(),
+                usuario.getSobrenome(),
+                usuario.getCpf(),
+                usuario.getEmail(),
+                usuario.getTelefone(),
+                usuario.getDataNascimento(),
+                usuario.getSexo(),
+                usuario.getAltura(),
+                usuario.getPeso(),
+                enderecoOutputDTO,
+                usuario.isAtivo()
+        );
+    }
+
+    public static Endereco toEnderecoModel(String logradouro, String bairro, String cep, String numero, String complemento, String cidade, String uf) {
+        return new Endereco(
+                logradouro, bairro, cep, numero, complemento, cidade, uf
+        );
+    }
+}
