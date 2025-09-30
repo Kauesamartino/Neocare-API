@@ -1,7 +1,10 @@
 package com.braincare.api.domain.model;
 
+import com.braincare.api.domain.exception.ValidacaoDominioException;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class Usuario {
 
@@ -27,23 +30,27 @@ public class Usuario {
 
     private Endereco endereco;
 
+    private Boolean ativo;
+
     public enum Sexo {
         MASCULINO,
         FEMININO,
-        OUTROS
+        OUTROS,
+        NAO_INFORMADO
     }
 
     public Usuario(String nome, String sobrenome, String cpf, String email, String telefone, LocalDate dataNascimento, Sexo sexo, Integer altura, Double peso, Endereco endereco) {
-        this.nome = nome;
-        this.sobrenome = sobrenome;
-        this.cpf = cpf;
-        this.email = email;
-        this.telefone = telefone;
-        this.dataNascimento = dataNascimento;
-        this.sexo = sexo;
-        this.altura = altura;
-        this.peso = peso;
-        this.endereco = endereco;
+        setNome(nome);
+        setSobrenome(sobrenome);
+        setCpf(cpf);
+        setEmail(email);
+        setTelefone(telefone);
+        setDataNascimento(dataNascimento);
+        setSexo(sexo);
+        setAltura(altura);
+        setPeso(peso);
+        setEndereco(endereco);
+        this.ativo = true;
     }
 
     public void setNome(String nome) {
@@ -162,11 +169,91 @@ public class Usuario {
         }
 
         LocalDate hoje = LocalDate.now();
-        LocalDate idadeMinima = hoje.minusDays(18);
+        LocalDate idadeMinima = hoje.minusYears(18);
 
         if (dataNascimento.isAfter(idadeMinima)) {
             throw new ValidacaoDominioException("É necessário ter pelo menos 18 anos");
         }
     }
 
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+        isEnderecoValido();
+    }
+
+    private void isEnderecoValido() {
+        if  (endereco == null) {
+            throw new ValidacaoDominioException("É necessário informar um endereço");
+        }
+    }
+
+    public void setSexo(Sexo sexo){
+        this.sexo = Objects.requireNonNullElse(sexo, Sexo.NAO_INFORMADO);
+    }
+
+    public void setAltura(Integer altura){
+        this.altura = altura;
+        isAlturaValido();
+    }
+
+    private void isAlturaValido() {
+        if (altura <= 0) {
+            throw new ValidacaoDominioException("Altura inválida");
+        }
+    }
+
+    public void setPeso(Double peso) {
+        this.peso = peso;
+        isPesoValido();
+    }
+
+    private void isPesoValido() {
+        if (peso <= 0) {
+            throw new ValidacaoDominioException("Peso inválido");
+        }
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getSobrenome() {
+        return sobrenome;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public LocalDate getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public Sexo getSexo() {
+        return sexo;
+    }
+
+    public Integer getAltura() {
+        return altura;
+    }
+
+    public Double getPeso() {
+        return peso;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public Boolean isAtivo() {
+        return ativo;
+    }
 }
