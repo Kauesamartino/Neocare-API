@@ -8,11 +8,11 @@
 		<version>3.5.6</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.braincare.api</groupId>
-	<artifactId>BrainCare-API</artifactId>
+	<groupId>com.neocare.api</groupId>
+	<artifactId>Neocare-API</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>BrainCare-API</name>
-	<description>API Rest for BrainCare</description>
+	<name>Neocare-API</name>
+	<description>API Rest for Neocare</description>
 	<url/>
 	<licenses>
 		<license/>
