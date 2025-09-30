@@ -1,4 +1,4 @@
-package com.braincare.api.domain.exception;
+package com.neocare.api.domain.exception;
 
 public class ValidacaoDominioException extends RuntimeException {
     public ValidacaoDominioException(String message) {

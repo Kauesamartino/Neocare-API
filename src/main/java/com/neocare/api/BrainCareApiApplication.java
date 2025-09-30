@@ -1,4 +1,4 @@
-package com.braincare.api;
+package com.neocare.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

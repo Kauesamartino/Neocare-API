@@ -1,6 +1,6 @@
-package com.braincare.api.domain.model;
+package com.neocare.api.domain.model;
 
-import com.braincare.api.domain.exception.ValidacaoDominioException;
+import com.neocare.api.domain.exception.ValidacaoDominioException;
 
 import java.time.LocalDate;
 import java.util.Objects;

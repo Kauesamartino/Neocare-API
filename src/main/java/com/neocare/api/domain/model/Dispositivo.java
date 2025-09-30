@@ -1,4 +1,4 @@
-package com.braincare.api.domain.model;
+package com.neocare.api.domain.model;
 
 public class Dispositivo {
 
