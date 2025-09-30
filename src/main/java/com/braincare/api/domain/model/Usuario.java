@@ -3,7 +3,6 @@ package com.braincare.api.domain.model;
 import com.braincare.api.domain.exception.ValidacaoDominioException;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Usuario {
