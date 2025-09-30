@@ -4,6 +4,7 @@ import com.neocare.api.domain.model.Usuario;
 import com.neocare.api.domain.repository.UsuarioRepository;
 import com.neocare.api.domain.usecase.usuario.CriarUsuarioUseCase;
 import com.neocare.api.domain.usecase.usuario.LocalizarUsuarioUseCase;
+import com.neocare.api.application.exception.*;
 
 public final class CriarUsuarioUseCaseImpl implements CriarUsuarioUseCase {
 
@@ -17,6 +18,11 @@ public final class CriarUsuarioUseCaseImpl implements CriarUsuarioUseCase {
 
     @Override
     public Usuario execute(Usuario usuario) {
-        return null;
+        try{
+            localizarUsuarioUseCase.execute(usuario.getId());
+        } catch (EntidadeNaoEncontradaException e){
+            return usuarioRepository.save(usuario);
+        }
+        throw new UsuarioUnsupportedOperation("Usuario já cadastrado");
     }
 }
