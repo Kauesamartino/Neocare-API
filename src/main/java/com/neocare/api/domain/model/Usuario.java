@@ -249,4 +249,8 @@ public class Usuario {
     public Boolean isAtivo() {
         return ativo;
     }
+
+    public Long getId() {
+        return id;
+    }
 }
