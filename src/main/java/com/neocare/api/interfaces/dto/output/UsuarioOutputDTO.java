@@ -1,23 +1,37 @@
 package com.neocare.api.interfaces.dto.output;
 
 import com.neocare.api.domain.enums.Sexo;
+import lombok.Getter;
 
 import java.time.LocalDate;
 
-public record UsuarioOutputDTO(
-        Long id,
-        String nome,
-        String sobrenome,
-        String cpf,
-        String email,
-        String telefone,
-        LocalDate dataNascimento,
-        Sexo sexo,
-        Integer altura,
-        Double peso,
-        EnderecoOutputDTO endereco,
-        Boolean ativo
-) {
+@Getter
+public class UsuarioOutputDTO {
+
+    private Long id;
+
+    private String nome;
+
+    private String sobrenome;
+
+    private String cpf;
+
+    private String email;
+
+    private String telefone;
+
+    private LocalDate dataNascimento;
+
+    private Sexo sexo;
+
+    private Integer altura;
+
+    private Double peso;
+
+    private EnderecoOutputDTO endereco;
+
+    private Boolean ativo;
+
     public UsuarioOutputDTO(Long id, String nome, String sobrenome, String cpf, String email, String telefone, LocalDate dataNascimento, Sexo sexo, Integer altura, Double peso, EnderecoOutputDTO endereco, Boolean ativo) {
         this.id = id;
         this.nome = nome;
@@ -32,4 +46,5 @@ public record UsuarioOutputDTO(
         this.endereco = endereco;
         this.ativo = ativo;
     }
+
 }
