@@ -1,6 +1,7 @@
 package com.neocare.api.domain.model;
 
 import com.neocare.api.domain.exception.ValidacaoDominioException;
+import com.neocare.api.domain.enums.Sexo;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -30,13 +31,6 @@ public class Usuario {
     private Endereco endereco;
 
     private Boolean ativo;
-
-    public enum Sexo {
-        MASCULINO,
-        FEMININO,
-        OUTROS,
-        NAO_INFORMADO
-    }
 
     public Usuario(String nome, String sobrenome, String cpf, String email, String telefone, LocalDate dataNascimento, Sexo sexo, Integer altura, Double peso, Endereco endereco) {
         setNome(nome);

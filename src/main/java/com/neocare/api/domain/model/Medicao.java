@@ -1,5 +1,7 @@
 package com.neocare.api.domain.model;
 
+import com.neocare.api.domain.enums.TipoMedicao;
+
 import java.time.LocalDateTime;
 
 public class Medicao {
@@ -13,10 +15,5 @@ public class Medicao {
     private LocalDateTime dataMedicao;
 
     private TipoMedicao tipoMedicao;
-
-    public enum TipoMedicao {
-        MEDICAO_VITAL,
-        MEDICAO_ESTRESSE
-    }
 
 }

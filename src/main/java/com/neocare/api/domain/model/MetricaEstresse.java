@@ -1,5 +1,7 @@
 package com.neocare.api.domain.model;
 
+import com.neocare.api.domain.enums.Categoria;
+
 import java.time.LocalDateTime;
 
 public class MetricaEstresse {
@@ -13,15 +15,4 @@ public class MetricaEstresse {
     private Categoria categoria;
 
     private LocalDateTime dataMetrica;
-
-    public enum Categoria {
-        AGUDO,
-        CRONICO,
-        EPISODICO_AGUDO,
-        EUSTRESS,
-        TRAUMATICO,
-        AMBIENTAL,
-        PSICOLOGICO,
-        FISIOLOGICO
-    }
 }

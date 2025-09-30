@@ -1,6 +1,7 @@
 package com.neocare.api.domain.model;
 
 import com.neocare.api.domain.exception.ValidacaoDominioException;
+import com.neocare.api.domain.enums.TipoDispositivo;
 
 public class Dispositivo {
 
@@ -13,12 +14,6 @@ public class Dispositivo {
     private Integer numeroSerie;
 
     private Boolean ativo;
-
-    public enum TipoDispositivo {
-        ESP32,
-        STM32,
-        SENSOR_CARDIACO
-    }
 
     public Dispositivo(Long usuarioId, TipoDispositivo tipoDispositivo, Integer numeroSerie) {
         setUsuarioId(usuarioId);

@@ -1,5 +1,8 @@
 package com.neocare.api.domain.model;
 
+import com.neocare.api.domain.enums.Severidade;
+import com.neocare.api.domain.enums.TipoAlerta;
+
 import java.time.LocalDateTime;
 
 public class Alerta {
@@ -19,16 +22,5 @@ public class Alerta {
     private String mensagem;
 
     private LocalDateTime dataNotificacao;
-
-    public enum TipoAlerta {
-        AVC,
-        ESTRESSE
-    }
-
-    public enum Severidade {
-        BAIXA,
-        MODERADA,
-        ALTA
-    }
 
 }
