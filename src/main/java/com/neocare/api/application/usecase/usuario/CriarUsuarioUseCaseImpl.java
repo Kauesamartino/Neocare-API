@@ -5,7 +5,7 @@ import com.neocare.api.domain.repository.UsuarioRepository;
 import com.neocare.api.domain.usecase.usuario.CriarUsuarioUseCase;
 import com.neocare.api.domain.usecase.usuario.LocalizarUsuarioUseCase;
 
-public class CriarUsuarioUseCaseImpl implements CriarUsuarioUseCase {
+public final class CriarUsuarioUseCaseImpl implements CriarUsuarioUseCase {
 
     private final UsuarioRepository usuarioRepository;
     private final LocalizarUsuarioUseCase localizarUsuarioUseCase;
