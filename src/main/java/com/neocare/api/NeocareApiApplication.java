@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BrainCareApiApplication {
+public class NeocareApiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BrainCareApiApplication.class, args);
+		SpringApplication.run(NeocareApiApplication.class, args);
 	}
 
 }
