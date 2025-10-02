@@ -6,11 +6,12 @@ import com.neocare.api.domain.repository.UsuarioRepository;
 import com.neocare.api.domain.usecase.usuario.CriarUsuarioUseCase;
 import com.neocare.api.domain.usecase.usuario.LocalizarUsuarioUseCase;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
+@Configuration
 public class UsuarioUseCasesConfig {
 
     private final UsuarioRepository usuarioRepository;
-
 
     public UsuarioUseCasesConfig(UsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
