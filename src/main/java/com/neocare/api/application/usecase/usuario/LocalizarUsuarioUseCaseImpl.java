@@ -14,6 +14,6 @@ public final class LocalizarUsuarioUseCaseImpl implements LocalizarUsuarioUseCas
 
     @Override
     public Usuario execute(String cpf) {
-        return usuarioRepository.findById(cpf);
+        return usuarioRepository.findByCpf(cpf);
     }
 }
