@@ -2,6 +2,7 @@ package com.neocare.api.interfaces.mapper;
 
 import com.neocare.api.domain.model.Endereco;
 import com.neocare.api.domain.model.Usuario;
+import com.neocare.api.infrastructure.entity.JpaUsuarioEntity;
 import com.neocare.api.interfaces.dto.input.UsuarioInputDTO;
 import com.neocare.api.interfaces.dto.output.EnderecoOutputDTO;
 import com.neocare.api.interfaces.dto.output.UsuarioOutputDTO;
@@ -66,6 +67,59 @@ public final class UsuarioMapper {
     public static Endereco toEnderecoModel(String logradouro, String bairro, String cep, String numero, String complemento, String cidade, String uf) {
         return new Endereco(
                 logradouro, bairro, cep, numero, complemento, cidade, uf
+        );
+    }
+
+    public static JpaUsuarioEntity toJpa(Usuario usuario) {
+        Endereco endereco = new Endereco(
+                usuario.getEndereco().getLogradouro(),
+                usuario.getEndereco().getBairro(),
+                usuario.getEndereco().getCep(),
+                usuario.getEndereco().getNumero(),
+                usuario.getEndereco().getComplemento(),
+                usuario.getEndereco().getCidade(),
+                usuario.getEndereco().getUf()
+        );
+
+        return new JpaUsuarioEntity(
+                usuario.getNome(),
+                usuario.getSobrenome(),
+                usuario.getCpf(),
+                usuario.getEmail(),
+                usuario.getTelefone(),
+                usuario.getDataNascimento(),
+                usuario.getSexo(),
+                usuario.getAltura(),
+                usuario.getPeso(),
+                endereco,
+                usuario.isAtivo()
+        );
+    }
+
+    public static Usuario entityToDomain(JpaUsuarioEntity savedEntity) {
+        Endereco endereco = new Endereco(
+                savedEntity.getEndereco().getLogradouro(),
+                savedEntity.getEndereco().getBairro(),
+                savedEntity.getEndereco().getCep(),
+                savedEntity.getEndereco().getNumero(),
+                savedEntity.getEndereco().getComplemento(),
+                savedEntity.getEndereco().getCidade(),
+                savedEntity.getEndereco().getUf()
+        );
+
+        return new Usuario(
+                savedEntity.getId(),
+                savedEntity.getNome(),
+                savedEntity.getSobrenome(),
+                savedEntity.getCpf(),
+                savedEntity.getEmail(),
+                savedEntity.getTelefone(),
+                savedEntity.getDataNascimento(),
+                savedEntity.getSexo(),
+                savedEntity.getAltura(),
+                savedEntity.getPeso(),
+                endereco,
+                savedEntity.getAtivo()
         );
     }
 }
