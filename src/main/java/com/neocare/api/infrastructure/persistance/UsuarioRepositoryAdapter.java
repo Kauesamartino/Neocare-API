@@ -39,17 +39,17 @@ public class UsuarioRepositoryAdapter implements UsuarioRepository {
     }
 
     @Override
-    public Usuario findById(Long id) {
-        logger.info("Buscando usuario por id: " + id);
+    public Usuario findByCpf(String cpf) {
+        logger.info("Buscando usuario por cpf: " + cpf);
         try {
-            JpaUsuarioEntity entity = jpaUsuarioRepository.findById(id)
-                    .orElseThrow(() -> new EntidadeNaoEncontradaException("Usuário do id: " + id + " não encontrado"));
+            JpaUsuarioEntity entity = jpaUsuarioRepository.findByCpf(cpf)
+                    .orElseThrow(() -> new EntidadeNaoEncontradaException("Usuário do id: " + cpf + " não encontrado"));
 
             logger.info("Usuario encontrado: " + entity.getId() + " " + entity.getSobrenome());
             return UsuarioMapper.entityToDomain(entity);
         } catch (DataAccessException e){
             logger.error("Erro ao buscar usuario: " + e.getMessage(), e);
-            throw new InfraestruturaException("Erro ao buscar usuario no banco de dados: " + e.getMessage(), e);
+            throw new InfraestruturaException("Erro ao buscar usuario por cpf: " + e.getMessage(), e);
         }
     }
 }

@@ -13,7 +13,7 @@ public final class LocalizarUsuarioUseCaseImpl implements LocalizarUsuarioUseCas
     }
 
     @Override
-    public Usuario execute(Long id) {
-        return usuarioRepository.findById(id);
+    public Usuario execute(String cpf) {
+        return usuarioRepository.findById(cpf);
     }
 }

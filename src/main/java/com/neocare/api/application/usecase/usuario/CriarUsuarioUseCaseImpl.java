@@ -19,7 +19,7 @@ public final class CriarUsuarioUseCaseImpl implements CriarUsuarioUseCase {
     @Override
     public Usuario execute(Usuario usuario) {
         try{
-            localizarUsuarioUseCase.execute(usuario.getId());
+            localizarUsuarioUseCase.execute(usuario.getCpf());
         } catch (EntidadeNaoEncontradaException e){
             return usuarioRepository.save(usuario);
         }
