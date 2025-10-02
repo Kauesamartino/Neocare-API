@@ -1,5 +1,6 @@
 package com.neocare.api.infrastructure.persistance;
 
+import com.neocare.api.application.exception.EntidadeNaoEncontradaException;
 import com.neocare.api.domain.logging.Logger;
 import com.neocare.api.domain.model.Usuario;
 import com.neocare.api.domain.repository.UsuarioRepository;
@@ -32,8 +33,23 @@ public class UsuarioRepositoryAdapter implements UsuarioRepository {
             logger.info("Usuario salvo com sucesso: " + usuario.getCpf());
             return UsuarioMapper.entityToDomain(savedEntity);
         } catch (DataAccessException e){
-            logger.error("Erro ao salvar cliente: " + e.getMessage(), e);
-            throw new InfraestruturaException("Erro ao salvar o cliente " + e.getMessage(), e);
+            logger.error("Erro ao salvar usuario: " + e.getMessage(), e);
+            throw new InfraestruturaException("Erro ao salvar o usuario " + e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public Usuario findById(Long id) {
+        logger.info("Buscando usuario por id: " + id);
+        try {
+            JpaUsuarioEntity entity = jpaUsuarioRepository.findById(id)
+                    .orElseThrow(() -> new EntidadeNaoEncontradaException("Usuário do id: " + id + " não encontrado"));
+
+            logger.info("Usuario encontrado: " + entity.getId() + " " + entity.getSobrenome());
+            return UsuarioMapper.entityToDomain(entity);
+        } catch (DataAccessException e){
+            logger.error("Erro ao buscar usuario: " + e.getMessage(), e);
+            throw new InfraestruturaException("Erro ao buscar usuario no banco de dados: " + e.getMessage(), e);
         }
     }
 }
