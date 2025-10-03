@@ -12,11 +12,13 @@ public class ControllersConfig {
     @Bean
     public UsuarioController usuarioController(
             CriarUsuarioUseCase criarUsuarioUseCase,
-            LocalizarUsuarioUseCase localizarUsuarioUseCase
+            LocalizarUsuarioUseCase localizarUsuarioUseCase,
+            LocalizarTodosOsUsuariosUseCase localizarTodosOsUsuariosUseCase
     ){
         return new UsuarioControllerImpl(
                 criarUsuarioUseCase,
-                localizarUsuarioUseCase);
+                localizarUsuarioUseCase,
+                localizarTodosOsUsuariosUseCase);
     }
 
 }
