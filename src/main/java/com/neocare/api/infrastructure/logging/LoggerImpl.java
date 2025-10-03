@@ -3,7 +3,7 @@ package com.neocare.api.infrastructure.logging;
 import com.neocare.api.domain.logging.Logger;
 import org.slf4j.LoggerFactory;
 
-public class LoggerImpl implements Logger {
+public final class LoggerImpl implements Logger {
 
     private final org.slf4j.Logger slf4jLogger;
 

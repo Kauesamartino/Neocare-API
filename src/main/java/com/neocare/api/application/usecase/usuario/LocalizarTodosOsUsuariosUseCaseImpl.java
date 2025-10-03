@@ -6,7 +6,7 @@ import com.neocare.api.domain.usecase.usuario.LocalizarTodosOsUsuariosUseCase;
 
 import java.util.List;
 
-public class LocalizarTodosOsUsuariosUseCaseImpl implements LocalizarTodosOsUsuariosUseCase {
+public final class LocalizarTodosOsUsuariosUseCaseImpl implements LocalizarTodosOsUsuariosUseCase {
 
     private final UsuarioRepository usuarioRepository;
 
