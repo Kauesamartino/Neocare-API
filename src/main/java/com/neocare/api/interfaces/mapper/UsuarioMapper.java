@@ -6,6 +6,7 @@ import com.neocare.api.infrastructure.entity.JpaUsuarioEntity;
 import com.neocare.api.interfaces.dto.input.UsuarioInputDTO;
 import com.neocare.api.interfaces.dto.output.EnderecoOutputDTO;
 import com.neocare.api.interfaces.dto.output.UsuarioOutputDTO;
+import com.neocare.api.interfaces.dto.output.UsuarioResumoOutputDTO;
 
 public final class UsuarioMapper {
     private UsuarioMapper() {
@@ -118,6 +119,16 @@ public final class UsuarioMapper {
                 savedEntity.getPeso(),
                 endereco,
                 savedEntity.getAtivo()
+        );
+    }
+
+    public static UsuarioResumoOutputDTO toResumoOutputDTO(Usuario usuario) {
+        return new UsuarioResumoOutputDTO(
+                usuario.getNome(),
+                usuario.getSobrenome(),
+                usuario.getCpf(),
+                usuario.getEmail(),
+                usuario.getTelefone()
         );
     }
 }
