@@ -8,8 +8,6 @@ import java.util.Objects;
 
 public class Usuario {
 
-    private Long id;
-
     private String nome;
 
     private String sobrenome;
@@ -32,8 +30,7 @@ public class Usuario {
 
     private Boolean ativo;
 
-    public Usuario(Long id, String nome, String sobrenome, String cpf, String email, String telefone, LocalDate dataNascimento, Sexo sexo, Integer altura, Double peso, Endereco endereco, Boolean ativo) {
-        this.id = id;
+    public Usuario(String nome, String sobrenome, String cpf, String email, String telefone, LocalDate dataNascimento, Sexo sexo, Integer altura, Double peso, Endereco endereco, Boolean ativo) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.cpf = cpf;
@@ -265,7 +262,4 @@ public class Usuario {
         return ativo;
     }
 
-    public Long getId() {
-        return id;
-    }
 }

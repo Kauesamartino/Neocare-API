@@ -108,7 +108,6 @@ public final class UsuarioMapper {
         );
 
         return new Usuario(
-                savedEntity.getId(),
                 savedEntity.getNome(),
                 savedEntity.getSobrenome(),
                 savedEntity.getCpf(),
