@@ -10,6 +10,9 @@ import com.neocare.api.infrastructure.repository.JpaUsuarioRepository;
 import com.neocare.api.interfaces.mapper.UsuarioMapper;
 import org.springframework.dao.DataAccessException;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 public class UsuarioRepositoryAdapter implements UsuarioRepository {
 
@@ -50,6 +53,20 @@ public class UsuarioRepositoryAdapter implements UsuarioRepository {
         } catch (DataAccessException e){
             logger.error("Erro ao buscar usuario: " + e.getMessage(), e);
             throw new InfraestruturaException("Erro ao buscar usuario por cpf: " + e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public List<Usuario> findAllByAtivoTrue() {
+        logger.info("Buscando todos os usuarios ativos");
+        try{
+            List<JpaUsuarioEntity> usuarios = jpaUsuarioRepository.findAllByAtivoTrue();
+            logger.info("Usuarios ativos encontrados: " + usuarios.size());
+            return usuarios.stream()
+                    .map(UsuarioMapper::entityToDomain)
+                    .collect(Collectors.toList());
+        } catch (DataAccessException e) {
+            throw new InfraestruturaException("Erro ao buscar usuarios ativos " + e.getMessage(), e);
         }
     }
 }
