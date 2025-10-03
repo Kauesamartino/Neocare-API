@@ -2,6 +2,7 @@ package com.neocare.api.interfaces.controller;
 
 import com.neocare.api.domain.model.Usuario;
 import com.neocare.api.domain.usecase.usuario.CriarUsuarioUseCase;
+import com.neocare.api.domain.usecase.usuario.LocalizarTodosOsUsuariosUseCase;
 import com.neocare.api.domain.usecase.usuario.LocalizarUsuarioUseCase;
 import com.neocare.api.interfaces.dto.input.UsuarioInputDTO;
 import com.neocare.api.interfaces.dto.output.UsuarioResumoOutputDTO;
@@ -20,10 +21,13 @@ public final class UsuarioControllerImpl implements UsuarioController {
 
     private final CriarUsuarioUseCase criarUsuarioUseCase;
     private final LocalizarUsuarioUseCase localizarUsuarioUseCase;
+    private final LocalizarTodosOsUsuariosUseCase localizarTodosOsUsuariosUseCase;
 
-    public UsuarioControllerImpl(CriarUsuarioUseCase criarUsuarioUseCase, LocalizarUsuarioUseCase localizarUsuarioUseCase) {
+    public UsuarioControllerImpl(CriarUsuarioUseCase criarUsuarioUseCase, LocalizarUsuarioUseCase localizarUsuarioUseCase,
+                                 LocalizarTodosOsUsuariosUseCase localizarTodosOsUsuariosUseCase) {
         this.criarUsuarioUseCase = criarUsuarioUseCase;
         this.localizarUsuarioUseCase = localizarUsuarioUseCase;
+        this.localizarTodosOsUsuariosUseCase = localizarTodosOsUsuariosUseCase;
     }
 
     @Override
