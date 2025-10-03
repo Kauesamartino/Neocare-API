@@ -2,7 +2,10 @@ package com.neocare.api.interfaces.controller;
 
 
 import com.neocare.api.interfaces.dto.input.UsuarioInputDTO;
+import com.neocare.api.interfaces.dto.output.UsuarioResumoOutputDTO;
 import com.neocare.api.interfaces.dto.output.UsuarioOutputDTO;
+
+import java.util.List;
 
 /**
  * Interface pura para o controller de Cliente, seguindo os princípios da Clean Architecture.
@@ -17,4 +20,11 @@ public interface UsuarioController {
      * @return dados do cliente criado
      */
     UsuarioOutputDTO criarUsuario(UsuarioInputDTO usuarioInputDTO);
+
+    /**
+     * Lista todos os usuários
+     *
+     * @return lista de usuários
+     */
+    List<UsuarioResumoOutputDTO> listarUsuarios();
 }
