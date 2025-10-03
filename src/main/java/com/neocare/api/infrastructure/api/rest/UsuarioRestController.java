@@ -2,15 +2,14 @@ package com.neocare.api.infrastructure.api.rest;
 
 import com.neocare.api.interfaces.controller.UsuarioController;
 import com.neocare.api.interfaces.dto.input.UsuarioInputDTO;
+import com.neocare.api.interfaces.dto.output.UsuarioResumoOutputDTO;
 import com.neocare.api.interfaces.dto.output.UsuarioOutputDTO;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 /**
  * Adaptador REST para o controller de Usuario.
@@ -32,5 +31,12 @@ public class UsuarioRestController {
         final UsuarioOutputDTO usuarioOutputDTO = usuarioController.criarUsuario(usuarioInputDTO);
         URI uri = uriComponentsBuilder.path("/usuarios/{id}").buildAndExpand(usuarioOutputDTO.getId()).toUri();
         return ResponseEntity.created(uri).body(usuarioOutputDTO);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<UsuarioResumoOutputDTO>> listarUsuarios(){
+
+        List<UsuarioResumoOutputDTO> usuarioPage = usuarioController.listarUsuarios();
+        return ResponseEntity.ok(usuarioPage);
     }
 }
