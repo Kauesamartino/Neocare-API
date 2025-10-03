@@ -32,8 +32,7 @@ public class UsuarioOutputDTO {
 
     private Boolean ativo;
 
-    public UsuarioOutputDTO(Long id, String nome, String sobrenome, String cpf, String email, String telefone, LocalDate dataNascimento, Sexo sexo, Integer altura, Double peso, EnderecoOutputDTO endereco, Boolean ativo) {
-        this.id = id;
+    public UsuarioOutputDTO(String nome, String sobrenome, String cpf, String email, String telefone, LocalDate dataNascimento, Sexo sexo, Integer altura, Double peso, EnderecoOutputDTO endereco, Boolean ativo) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.cpf = cpf;

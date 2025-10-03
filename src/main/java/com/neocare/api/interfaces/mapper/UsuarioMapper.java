@@ -49,7 +49,6 @@ public final class UsuarioMapper {
         );
 
         return new UsuarioOutputDTO(
-                usuario.getId(),
                 usuario.getNome(),
                 usuario.getSobrenome(),
                 usuario.getCpf(),
