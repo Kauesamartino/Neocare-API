@@ -4,6 +4,8 @@ import com.neocare.api.domain.model.Usuario;
 import com.neocare.api.domain.usecase.usuario.CriarUsuarioUseCase;
 import com.neocare.api.domain.usecase.usuario.LocalizarTodosOsUsuariosUseCase;
 import com.neocare.api.domain.usecase.usuario.LocalizarUsuarioUseCase;
+import com.neocare.api.domain.usecase.usuario.EditarUsuarioUseCase;
+import com.neocare.api.interfaces.dto.input.UsuarioAtualizacaoInputDTO;
 import com.neocare.api.interfaces.dto.input.UsuarioInputDTO;
 import com.neocare.api.interfaces.dto.output.UsuarioResumoOutputDTO;
 import com.neocare.api.interfaces.dto.output.UsuarioOutputDTO;
@@ -22,9 +24,11 @@ public final class UsuarioControllerImpl implements UsuarioController {
     private final CriarUsuarioUseCase criarUsuarioUseCase;
     private final LocalizarUsuarioUseCase localizarUsuarioUseCase;
     private final LocalizarTodosOsUsuariosUseCase localizarTodosOsUsuariosUseCase;
+    private final EditarUsuarioUseCase editarUsuarioUseCase;
 
     public UsuarioControllerImpl(CriarUsuarioUseCase criarUsuarioUseCase, LocalizarUsuarioUseCase localizarUsuarioUseCase,
-                                 LocalizarTodosOsUsuariosUseCase localizarTodosOsUsuariosUseCase) {
+                                 LocalizarTodosOsUsuariosUseCase localizarTodosOsUsuariosUseCase, EditarUsuarioUseCase editarUsuarioUseCase) {
+        this.editarUsuarioUseCase = editarUsuarioUseCase;
         this.criarUsuarioUseCase = criarUsuarioUseCase;
         this.localizarUsuarioUseCase = localizarUsuarioUseCase;
         this.localizarTodosOsUsuariosUseCase = localizarTodosOsUsuariosUseCase;
@@ -51,5 +55,12 @@ public final class UsuarioControllerImpl implements UsuarioController {
     public UsuarioOutputDTO localizarUsuarioPorCpf(String cpf) {
         Usuario usuario = localizarUsuarioUseCase.execute(cpf);
         return UsuarioMapper.toOutputDTO(usuario);
+    }
+
+    @Override
+    public UsuarioOutputDTO editarUsuario(UsuarioAtualizacaoInputDTO usuarioInputDTO) {
+        Usuario usuario = UsuarioMapper.atualizacaoDtoToModel(usuarioInputDTO);
+        Usuario editedUsuario = editarUsuarioUseCase.execute(usuario);
+        return UsuarioMapper.toOutputDTO(editedUsuario);
     }
 }

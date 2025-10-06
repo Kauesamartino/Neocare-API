@@ -3,6 +3,7 @@ package com.neocare.api.interfaces.mapper;
 import com.neocare.api.domain.model.Endereco;
 import com.neocare.api.domain.model.Usuario;
 import com.neocare.api.infrastructure.entity.JpaUsuarioEntity;
+import com.neocare.api.interfaces.dto.input.UsuarioAtualizacaoInputDTO;
 import com.neocare.api.interfaces.dto.input.UsuarioInputDTO;
 import com.neocare.api.interfaces.dto.output.EnderecoOutputDTO;
 import com.neocare.api.interfaces.dto.output.UsuarioOutputDTO;
@@ -119,6 +120,31 @@ public final class UsuarioMapper {
                 usuario.getCpf(),
                 usuario.getEmail(),
                 usuario.getTelefone()
+        );
+    }
+
+    public static Usuario atualizacaoDtoToModel(UsuarioAtualizacaoInputDTO dto) {
+        Endereco endereco = toEnderecoModel(
+                dto.endereco().logradouro(),
+                dto.endereco().bairro(),
+                dto.endereco().cep(),
+                dto.endereco().numero(),
+                dto.endereco().complemento(),
+                dto.endereco().cidade(),
+                dto.endereco().uf()
+        );
+
+        return new Usuario(
+                dto.nome(),
+                dto.sobrenome(),
+                dto.cpf(),
+                dto.email(),
+                dto.telefone(),
+                dto.dataNascimento(),
+                dto.sexo(),
+                dto.altura(),
+                dto.peso(),
+                endereco
         );
     }
 }

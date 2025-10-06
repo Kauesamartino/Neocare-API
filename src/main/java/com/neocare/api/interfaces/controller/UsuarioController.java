@@ -1,6 +1,7 @@
 package com.neocare.api.interfaces.controller;
 
 
+import com.neocare.api.interfaces.dto.input.UsuarioAtualizacaoInputDTO;
 import com.neocare.api.interfaces.dto.input.UsuarioInputDTO;
 import com.neocare.api.interfaces.dto.output.UsuarioResumoOutputDTO;
 import com.neocare.api.interfaces.dto.output.UsuarioOutputDTO;
@@ -35,4 +36,12 @@ public interface UsuarioController {
      * @return dados do usuário
      */
     UsuarioOutputDTO localizarUsuarioPorCpf(String cpf);
+
+    /**
+     * Edita um usuário existente
+     *
+     * @param usuarioInputDTO dados do usuário a ser editado
+     * @return dados do usuário editado
+     */
+    UsuarioOutputDTO editarUsuario(UsuarioAtualizacaoInputDTO usuarioInputDTO);
 }
