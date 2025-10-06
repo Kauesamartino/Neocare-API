@@ -29,7 +29,7 @@ public class UsuarioRestController {
     @PostMapping
     public ResponseEntity<UsuarioOutputDTO> criarUsuario(@RequestBody UsuarioInputDTO usuarioInputDTO, UriComponentsBuilder uriComponentsBuilder) {
         final UsuarioOutputDTO usuarioOutputDTO = usuarioController.criarUsuario(usuarioInputDTO);
-        URI uri = uriComponentsBuilder.path("/usuarios/{id}").buildAndExpand(usuarioOutputDTO.getId()).toUri();
+        URI uri = uriComponentsBuilder.path("/usuarios/{cpf}").buildAndExpand(usuarioOutputDTO.getCpf()).toUri();
         return ResponseEntity.created(uri).body(usuarioOutputDTO);
     }
 
