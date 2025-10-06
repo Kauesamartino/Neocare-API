@@ -46,4 +46,10 @@ public final class UsuarioControllerImpl implements UsuarioController {
                 .map(UsuarioMapper::toResumoOutputDTO)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public UsuarioOutputDTO localizarUsuarioPorCpf(String cpf) {
+        Usuario usuario = localizarUsuarioUseCase.execute(cpf);
+        return UsuarioMapper.toOutputDTO(usuario);
+    }
 }

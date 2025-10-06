@@ -27,4 +27,12 @@ public interface UsuarioController {
      * @return lista de usuários
      */
     List<UsuarioResumoOutputDTO> listarUsuarios();
+
+    /**
+     * Localizar um usuário por CPF
+     *
+     * @param cpf do usuário a ser buscado
+     * @return dados do usuário
+     */
+    UsuarioOutputDTO localizarUsuarioPorCpf(String cpf);
 }
