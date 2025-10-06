@@ -13,12 +13,14 @@ public class ControllersConfig {
     public UsuarioController usuarioController(
             CriarUsuarioUseCase criarUsuarioUseCase,
             LocalizarUsuarioUseCase localizarUsuarioUseCase,
-            LocalizarTodosOsUsuariosUseCase localizarTodosOsUsuariosUseCase
+            LocalizarTodosOsUsuariosUseCase localizarTodosOsUsuariosUseCase,
+            EditarUsuarioUseCase editarUsuarioUseCase
     ){
         return new UsuarioControllerImpl(
                 criarUsuarioUseCase,
                 localizarUsuarioUseCase,
-                localizarTodosOsUsuariosUseCase);
+                localizarTodosOsUsuariosUseCase,
+                editarUsuarioUseCase);
     }
 
 }

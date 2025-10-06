@@ -1,11 +1,13 @@
 package com.neocare.api.infrastructure.config;
 
 import com.neocare.api.application.usecase.usuario.CriarUsuarioUseCaseImpl;
+import com.neocare.api.application.usecase.usuario.EditarUsuarioUseCaseImpl;
 import com.neocare.api.application.usecase.usuario.LocalizarUsuarioUseCaseImpl;
 import com.neocare.api.application.usecase.usuario.LocalizarTodosOsUsuariosUseCaseImpl;
 
 import com.neocare.api.domain.repository.UsuarioRepository;
 import com.neocare.api.domain.usecase.usuario.CriarUsuarioUseCase;
+import com.neocare.api.domain.usecase.usuario.EditarUsuarioUseCase;
 import com.neocare.api.domain.usecase.usuario.LocalizarTodosOsUsuariosUseCase;
 import com.neocare.api.domain.usecase.usuario.LocalizarUsuarioUseCase;
 import org.springframework.context.annotation.Bean;
@@ -33,5 +35,10 @@ public class UsuarioUseCasesConfig {
     @Bean
     public LocalizarTodosOsUsuariosUseCase localizarTodosOsUsuariosUseCase() {
         return new LocalizarTodosOsUsuariosUseCaseImpl(usuarioRepository);
+    }
+
+    @Bean
+    public EditarUsuarioUseCase editarUsuarioUseCase() {
+        return new EditarUsuarioUseCaseImpl(localizarUsuarioUseCase(), usuarioRepository);
     }
 }
