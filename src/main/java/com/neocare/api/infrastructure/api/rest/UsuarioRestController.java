@@ -39,4 +39,10 @@ public class UsuarioRestController {
         List<UsuarioResumoOutputDTO> usuarioPage = usuarioController.listarUsuarios();
         return ResponseEntity.ok(usuarioPage);
     }
+
+    @GetMapping("/{cpf}")
+    public ResponseEntity<UsuarioOutputDTO> buscarUsuarioPorCpf(@PathVariable String cpf){
+        final UsuarioOutputDTO usuarioOutputDTO = usuarioController.localizarUsuarioPorCpf(cpf);
+        return ResponseEntity.ok(usuarioOutputDTO);
+    }
 }
