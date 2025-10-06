@@ -1,8 +1,6 @@
 package com.neocare.api.interfaces.dto.output;
 
-import lombok.Getter;
 
-@Getter
 public class EnderecoOutputDTO{
 
     private String logradouro;
