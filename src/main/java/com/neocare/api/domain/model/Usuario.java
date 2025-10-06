@@ -157,9 +157,9 @@ public class Usuario {
 
     private void isTelefoneValido() {
         //regex para validar se telefone (xx)xxxxx-xxxx
-        final String regex = "^\\(\\d{2}\\)\\d{4,5}-\\d{4}$";
+        final String regex = "^\\(\\d{2}\\) \\d{4,5}-\\d{4}$";
         if (!telefone.matches(regex)) {
-            throw new ValidacaoDominioException("Telefone inválido, utilize o formato (DD) XXXXX-XXXX");
+            throw new ValidacaoDominioException("Telefone inválido, utilize o formato (DD)XXXXX-XXXX");
         }
     }
 

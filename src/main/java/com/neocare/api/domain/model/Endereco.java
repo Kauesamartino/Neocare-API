@@ -79,4 +79,7 @@ public class Endereco {
     public String getUf() {
         return uf;
     }
+
+    public Endereco() {
+    }
 }
