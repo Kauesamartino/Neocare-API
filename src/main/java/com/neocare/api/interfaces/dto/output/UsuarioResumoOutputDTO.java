@@ -18,4 +18,24 @@ public class UsuarioResumoOutputDTO {
         this.email = email;
         this.telefone = telefone;
     }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getSobrenome() {
+        return sobrenome;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
 }
