@@ -16,5 +16,5 @@ CREATE TABLE usuario (
                          complemento VARCHAR(100),
                          cidade VARCHAR(100),
                          uf VARCHAR(2),
-                         ativo SMALLINT CHECK (ativo IN (0,1))
+                         ativo BOOLEAN NOT NULL DEFAULT TRUE
 );
