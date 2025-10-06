@@ -69,4 +69,42 @@ public class UsuarioRepositoryAdapter implements UsuarioRepository {
             throw new InfraestruturaException("Erro ao buscar usuarios ativos " + e.getMessage(), e);
         }
     }
+
+    @Override
+    public Usuario update(Usuario usuario) {
+        logger.info("Atualizando usuário com CPF: " + usuario.getCpf());
+
+        try {
+            JpaUsuarioEntity entity = jpaUsuarioRepository.findByCpf(usuario.getCpf())
+                    .orElseThrow(() -> new EntidadeNaoEncontradaException("Usuário do id: " + usuario.getCpf() + " não encontrado"));
+
+            logger.info("Usuario encontrado: " + entity.getId() + " " + entity.getSobrenome());
+
+            entity.setNome(usuario.getNome());
+            entity.setSobrenome(usuario.getSobrenome());
+            entity.setEmail(usuario.getEmail());
+            entity.setTelefone(usuario.getTelefone());
+            entity.setDataNascimento(usuario.getDataNascimento());
+            entity.setSexo(usuario.getSexo());
+            entity.setAltura(usuario.getAltura());
+            entity.setPeso(usuario.getPeso());
+            entity.setEndereco(UsuarioMapper.toEnderecoModel(
+                    usuario.getEndereco().getLogradouro(),
+                    usuario.getEndereco().getBairro(),
+                    usuario.getEndereco().getCep(),
+                    usuario.getEndereco().getNumero(),
+                    usuario.getEndereco().getComplemento(),
+                    usuario.getEndereco().getCidade(),
+                    usuario.getEndereco().getUf()
+            ));
+
+            JpaUsuarioEntity updatedEntity = jpaUsuarioRepository.save(entity);
+            logger.info("Usuário atualizado com sucesso: " + usuario.getCpf());
+
+            return UsuarioMapper.entityToDomain(updatedEntity);
+        } catch (DataAccessException e){
+            logger.error("Erro ao buscar usuario: " + e.getMessage(), e);
+            throw new InfraestruturaException("Erro ao buscar usuario por cpf: " + e.getMessage(), e);
+        }
+    }
 }

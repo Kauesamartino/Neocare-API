@@ -10,4 +10,6 @@ public interface UsuarioRepository {
     Usuario findByCpf(String cpf);
 
     List<Usuario> findAllByAtivoTrue();
+
+    Usuario update(Usuario usuario);
 }
