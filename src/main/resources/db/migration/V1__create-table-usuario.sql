@@ -1,0 +1,20 @@
+CREATE TABLE usuario (
+                         id BIGSERIAL PRIMARY KEY,
+                         nome VARCHAR(100) NOT NULL,
+                         sobrenome VARCHAR(100) NOT NULL,
+                         cpf VARCHAR(11) UNIQUE NOT NULL,
+                         email VARCHAR(150) UNIQUE NOT NULL,
+                         telefone VARCHAR(20),
+                         data_nascimento DATE,
+                         sexo VARCHAR(10),
+                         altura NUMERIC(5),
+                         peso NUMERIC(10,2),
+                         logradouro VARCHAR(200),
+                         bairro VARCHAR(100),
+                         cep VARCHAR(9),
+                         numero VARCHAR(10),
+                         complemento VARCHAR(100),
+                         cidade VARCHAR(100),
+                         uf VARCHAR(2),
+                         ativo SMALLINT CHECK (ativo IN (0,1))
+);
