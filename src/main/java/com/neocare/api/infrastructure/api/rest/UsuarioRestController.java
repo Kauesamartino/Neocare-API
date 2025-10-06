@@ -1,6 +1,7 @@
 package com.neocare.api.infrastructure.api.rest;
 
 import com.neocare.api.interfaces.controller.UsuarioController;
+import com.neocare.api.interfaces.dto.input.UsuarioAtualizacaoInputDTO;
 import com.neocare.api.interfaces.dto.input.UsuarioInputDTO;
 import com.neocare.api.interfaces.dto.output.UsuarioResumoOutputDTO;
 import com.neocare.api.interfaces.dto.output.UsuarioOutputDTO;
@@ -36,13 +37,19 @@ public class UsuarioRestController {
     @GetMapping
     public ResponseEntity<List<UsuarioResumoOutputDTO>> listarUsuarios(){
 
-        List<UsuarioResumoOutputDTO> usuarioPage = usuarioController.listarUsuarios();
+        List<UsuarioResumoOutputDTO> usuarioPage = this.usuarioController.listarUsuarios();
         return ResponseEntity.ok(usuarioPage);
     }
 
     @GetMapping("/{cpf}")
     public ResponseEntity<UsuarioOutputDTO> buscarUsuarioPorCpf(@PathVariable String cpf){
-        final UsuarioOutputDTO usuarioOutputDTO = usuarioController.localizarUsuarioPorCpf(cpf);
+        final UsuarioOutputDTO usuarioOutputDTO = this.usuarioController.localizarUsuarioPorCpf(cpf);
+        return ResponseEntity.ok(usuarioOutputDTO);
+    }
+
+    @PutMapping
+    public ResponseEntity<UsuarioOutputDTO> editarUsuario(@RequestBody UsuarioAtualizacaoInputDTO usuarioInputDTO) {
+        UsuarioOutputDTO usuarioOutputDTO = this.usuarioController.editarUsuario(usuarioInputDTO);
         return ResponseEntity.ok(usuarioOutputDTO);
     }
 }
