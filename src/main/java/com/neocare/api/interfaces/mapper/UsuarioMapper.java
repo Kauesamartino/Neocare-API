@@ -71,7 +71,7 @@ public final class UsuarioMapper {
     }
 
     public static JpaUsuarioEntity toJpa(Usuario usuario) {
-        Endereco endereco = new Endereco(
+        Endereco endereco = toEnderecoModel(
                 usuario.getEndereco().getLogradouro(),
                 usuario.getEndereco().getBairro(),
                 usuario.getEndereco().getCep(),
@@ -97,16 +97,6 @@ public final class UsuarioMapper {
     }
 
     public static Usuario entityToDomain(JpaUsuarioEntity savedEntity) {
-        Endereco endereco = new Endereco(
-                savedEntity.getEndereco().getLogradouro(),
-                savedEntity.getEndereco().getBairro(),
-                savedEntity.getEndereco().getCep(),
-                savedEntity.getEndereco().getNumero(),
-                savedEntity.getEndereco().getComplemento(),
-                savedEntity.getEndereco().getCidade(),
-                savedEntity.getEndereco().getUf()
-        );
-
         return new Usuario(
                 savedEntity.getNome(),
                 savedEntity.getSobrenome(),
@@ -117,7 +107,7 @@ public final class UsuarioMapper {
                 savedEntity.getSexo(),
                 savedEntity.getAltura(),
                 savedEntity.getPeso(),
-                endereco,
+                savedEntity.getEndereco(),
                 savedEntity.getAtivo()
         );
     }
