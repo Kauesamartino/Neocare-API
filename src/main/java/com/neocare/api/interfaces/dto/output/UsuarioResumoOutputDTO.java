@@ -1,5 +1,8 @@
 package com.neocare.api.interfaces.dto.output;
 
+/**
+ * Dados de saída para o resumo do usuário
+ */
 public class UsuarioResumoOutputDTO {
     private String nome;
 

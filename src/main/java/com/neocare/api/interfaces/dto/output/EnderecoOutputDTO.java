@@ -1,6 +1,8 @@
 package com.neocare.api.interfaces.dto.output;
 
-
+/**
+ * Dados de saída para o endereço
+ */
 public class EnderecoOutputDTO{
 
     private String logradouro;

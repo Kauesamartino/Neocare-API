@@ -4,8 +4,10 @@ import com.neocare.api.domain.enums.Sexo;
 
 import java.time.LocalDate;
 
+/**
+ * Dados de saída para o usuário
+ */
 public class UsuarioOutputDTO {
-
 
     private String nome;
 
