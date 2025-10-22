@@ -6,10 +6,10 @@ import com.neocare.api.application.usecase.usuario.LocalizarUsuarioUseCaseImpl;
 import com.neocare.api.application.usecase.usuario.LocalizarTodosOsUsuariosUseCaseImpl;
 
 import com.neocare.api.domain.repository.UsuarioRepository;
-import com.neocare.api.domain.usecase.usuario.CriarUsuarioUseCase;
-import com.neocare.api.domain.usecase.usuario.EditarUsuarioUseCase;
-import com.neocare.api.domain.usecase.usuario.LocalizarTodosOsUsuariosUseCase;
-import com.neocare.api.domain.usecase.usuario.LocalizarUsuarioUseCase;
+import com.neocare.api.application.usecase.usuario.CriarUsuarioUseCase;
+import com.neocare.api.application.usecase.usuario.EditarUsuarioUseCase;
+import com.neocare.api.application.usecase.usuario.LocalizarTodosOsUsuariosUseCase;
+import com.neocare.api.application.usecase.usuario.LocalizarUsuarioUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

@@ -1,10 +1,10 @@
 package com.neocare.api.interfaces.controller;
 
 import com.neocare.api.domain.model.Usuario;
-import com.neocare.api.domain.usecase.usuario.CriarUsuarioUseCase;
-import com.neocare.api.domain.usecase.usuario.LocalizarTodosOsUsuariosUseCase;
-import com.neocare.api.domain.usecase.usuario.LocalizarUsuarioUseCase;
-import com.neocare.api.domain.usecase.usuario.EditarUsuarioUseCase;
+import com.neocare.api.application.usecase.usuario.CriarUsuarioUseCase;
+import com.neocare.api.application.usecase.usuario.LocalizarTodosOsUsuariosUseCase;
+import com.neocare.api.application.usecase.usuario.LocalizarUsuarioUseCase;
+import com.neocare.api.application.usecase.usuario.EditarUsuarioUseCase;
 import com.neocare.api.interfaces.dto.input.UsuarioAtualizacaoInputDTO;
 import com.neocare.api.interfaces.dto.input.UsuarioInputDTO;
 import com.neocare.api.interfaces.dto.output.UsuarioResumoOutputDTO;

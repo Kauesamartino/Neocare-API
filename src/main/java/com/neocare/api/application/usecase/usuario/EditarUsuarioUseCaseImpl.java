@@ -4,8 +4,6 @@ import com.neocare.api.application.exception.EntidadeNaoEncontradaException;
 import com.neocare.api.application.exception.UsuarioUnsupportedOperation;
 import com.neocare.api.domain.model.Usuario;
 import com.neocare.api.domain.repository.UsuarioRepository;
-import com.neocare.api.domain.usecase.usuario.EditarUsuarioUseCase;
-import com.neocare.api.domain.usecase.usuario.LocalizarUsuarioUseCase;
 
 public final class EditarUsuarioUseCaseImpl implements EditarUsuarioUseCase {
 

@@ -1,4 +1,4 @@
-package com.neocare.api.domain.usecase.usuario;
+package com.neocare.api.application.usecase.usuario;
 
 import com.neocare.api.domain.model.Usuario;
 
