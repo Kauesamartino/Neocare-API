@@ -274,4 +274,8 @@ public class JpaUsuarioEntity {
             throw new ValidacaoDominioException("Peso inválido");
         }
     }
+
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
+    }
 }

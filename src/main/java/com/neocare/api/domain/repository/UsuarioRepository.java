@@ -12,4 +12,6 @@ public interface UsuarioRepository {
     List<Usuario> findAllByAtivoTrue();
 
     Usuario update(Usuario usuario);
+
+    void desativar(String cpf);
 }

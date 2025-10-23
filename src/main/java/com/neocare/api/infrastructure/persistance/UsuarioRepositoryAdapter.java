@@ -107,4 +107,23 @@ public class UsuarioRepositoryAdapter implements UsuarioRepository {
             throw new InfraestruturaException("Erro ao buscar usuario por cpf: " + e.getMessage(), e);
         }
     }
+
+    @Override
+    public void desativar(String cpf) {
+        logger.info("Desativando usuario por cpf: " + cpf);
+
+        try{
+            JpaUsuarioEntity entity = jpaUsuarioRepository.findByCpf(cpf)
+                    .orElseThrow(() -> new EntidadeNaoEncontradaException("Usuário do id: " + cpf + " não encontrado"));
+
+            logger.info("Usuario encontrado: " + entity.getId() + " " + entity.getSobrenome());
+            entity.setAtivo(false);
+            jpaUsuarioRepository.save(entity);
+
+            logger.info("Usuario desativado com sucesso: " + entity.getCpf());
+        } catch (DataAccessException e) {
+            logger.error("Erro ao buscar usuario por cpf: " + e.getMessage(), e);
+            throw new InfraestruturaException("Erro ao desativar usuario por cpf: " + e.getMessage(), e);
+        }
+    }
 }
