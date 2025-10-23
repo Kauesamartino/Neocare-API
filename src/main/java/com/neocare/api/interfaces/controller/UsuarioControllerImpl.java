@@ -1,10 +1,7 @@
 package com.neocare.api.interfaces.controller;
 
+import com.neocare.api.application.usecase.usuario.*;
 import com.neocare.api.domain.model.Usuario;
-import com.neocare.api.application.usecase.usuario.CriarUsuarioUseCase;
-import com.neocare.api.application.usecase.usuario.LocalizarTodosOsUsuariosUseCase;
-import com.neocare.api.application.usecase.usuario.LocalizarUsuarioUseCase;
-import com.neocare.api.application.usecase.usuario.EditarUsuarioUseCase;
 import com.neocare.api.interfaces.dto.input.UsuarioAtualizacaoInputDTO;
 import com.neocare.api.interfaces.dto.input.UsuarioInputDTO;
 import com.neocare.api.interfaces.dto.output.UsuarioResumoOutputDTO;
@@ -25,13 +22,15 @@ public final class UsuarioControllerImpl implements UsuarioController {
     private final LocalizarUsuarioUseCase localizarUsuarioUseCase;
     private final LocalizarTodosOsUsuariosUseCase localizarTodosOsUsuariosUseCase;
     private final EditarUsuarioUseCase editarUsuarioUseCase;
+    private final DesativarUsuarioUseCase desativarUsuarioUseCase;
 
     public UsuarioControllerImpl(CriarUsuarioUseCase criarUsuarioUseCase, LocalizarUsuarioUseCase localizarUsuarioUseCase,
-                                 LocalizarTodosOsUsuariosUseCase localizarTodosOsUsuariosUseCase, EditarUsuarioUseCase editarUsuarioUseCase) {
+                                 LocalizarTodosOsUsuariosUseCase localizarTodosOsUsuariosUseCase, EditarUsuarioUseCase editarUsuarioUseCase, DesativarUsuarioUseCase desativarUsuarioUseCase) {
         this.editarUsuarioUseCase = editarUsuarioUseCase;
         this.criarUsuarioUseCase = criarUsuarioUseCase;
         this.localizarUsuarioUseCase = localizarUsuarioUseCase;
         this.localizarTodosOsUsuariosUseCase = localizarTodosOsUsuariosUseCase;
+        this.desativarUsuarioUseCase = desativarUsuarioUseCase;
     }
 
     @Override
@@ -62,5 +61,10 @@ public final class UsuarioControllerImpl implements UsuarioController {
         Usuario usuario = UsuarioMapper.atualizacaoDtoToModel(usuarioInputDTO);
         Usuario editedUsuario = editarUsuarioUseCase.execute(usuario);
         return UsuarioMapper.toOutputDTO(editedUsuario);
+    }
+
+    @Override
+    public void desativarUsuario(String cpf) {
+        desativarUsuarioUseCase.execute(cpf);
     }
 }

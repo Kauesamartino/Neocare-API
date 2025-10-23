@@ -52,4 +52,10 @@ public class UsuarioRestController {
         UsuarioOutputDTO usuarioOutputDTO = this.usuarioController.editarUsuario(usuarioInputDTO);
         return ResponseEntity.ok(usuarioOutputDTO);
     }
+
+    @DeleteMapping("/{cpf}")
+    public ResponseEntity<Void> desativarUsuario(@PathVariable String cpf) {
+        this.usuarioController.desativarUsuario(cpf);
+        return ResponseEntity.noContent().build();
+    }
 }

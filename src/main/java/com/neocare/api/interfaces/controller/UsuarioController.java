@@ -44,4 +44,11 @@ public interface UsuarioController {
      * @return dados do usuário editado
      */
     UsuarioOutputDTO editarUsuario(UsuarioAtualizacaoInputDTO usuarioInputDTO);
+
+    /**
+     * Desativa um usuário pelo CPF
+     *
+     * @param cpf do usuário a ser desativado
+     */
+    void desativarUsuario(String cpf);
 }
