@@ -3,8 +3,8 @@ package com.neocare.api.infrastructure.entity;
 import com.neocare.api.domain.enums.TipoDispositivo;
 import jakarta.persistence.*;
 
-@Table
-@Entity
+@Table(name = "dispositivo")
+@Entity(name = "Dispositivo")
 public class JpaDispositivoEntity {
 
     @Id @GeneratedValue(strategy= GenerationType.IDENTITY)
