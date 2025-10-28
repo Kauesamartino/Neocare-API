@@ -23,6 +23,13 @@ public class Dispositivo {
         this.ativo = true;
     }
 
+    public Dispositivo(Long usuarioId, TipoDispositivo tipoDispositivo, String enderecoDisp, Boolean ativo) {
+        setUsuarioId(usuarioId);
+        setTipoDispositivo(tipoDispositivo);
+        setEnderecoDisp(enderecoDisp);
+        this.ativo = ativo;
+    }
+
     public void setUsuarioId(Long usuarioId) {
         if (usuarioId == null) {
             throw new ValidacaoDominioException("Id do usuário não pode ser nulo");
