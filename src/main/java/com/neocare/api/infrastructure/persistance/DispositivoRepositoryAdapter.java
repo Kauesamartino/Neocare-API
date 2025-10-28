@@ -6,6 +6,7 @@ import com.neocare.api.domain.repository.DispositivoRepository;
 import com.neocare.api.infrastructure.entity.JpaDispositivoEntity;
 import com.neocare.api.infrastructure.exception.InfraestruturaException;
 import com.neocare.api.infrastructure.repository.JpaDispositivoRepository;
+import com.neocare.api.interfaces.mapper.DispositivoMapper;
 
 public class DispositivoRepositoryAdapter implements DispositivoRepository {
 
