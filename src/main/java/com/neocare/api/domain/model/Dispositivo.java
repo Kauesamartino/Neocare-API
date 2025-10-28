@@ -5,20 +5,21 @@ import com.neocare.api.domain.enums.TipoDispositivo;
 
 public class Dispositivo {
 
-    private Long id;
-
     private Long usuarioId;
 
     private TipoDispositivo tipoDispositivo;
 
-    private Integer numeroSerie;
+    private String enderecoDisp;
 
     private Boolean ativo;
 
-    public Dispositivo(Long usuarioId, TipoDispositivo tipoDispositivo, Integer numeroSerie) {
+    public Dispositivo() {
+    }
+
+    public Dispositivo(Long usuarioId, TipoDispositivo tipoDispositivo, String enderecoDisp) {
         setUsuarioId(usuarioId);
         setTipoDispositivo(tipoDispositivo);
-        setNumeroSerie(numeroSerie);
+        setEnderecoDisp(enderecoDisp);
         this.ativo = true;
     }
 
@@ -36,30 +37,10 @@ public class Dispositivo {
         }
     }
 
-    public void setNumeroSerie(Integer numeroSerie) {
-        this.numeroSerie = numeroSerie;
-        if (numeroSerie == null) {
+    public void setEnderecoDisp(String enderecoDisp) {
+        this.enderecoDisp = enderecoDisp;
+        if (enderecoDisp == null || enderecoDisp.isEmpty()) {
             throw new ValidacaoDominioException("Número de série não pode ser vazio");
         }
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public Long getUsuarioId() {
-        return usuarioId;
-    }
-
-    public TipoDispositivo getTipoDispositivo() {
-        return tipoDispositivo;
-    }
-
-    public Integer getNumeroSerie() {
-        return numeroSerie;
-    }
-
-    public Boolean getAtivo() {
-        return ativo;
     }
 }
