@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Table(name = "usuario")
-@Entity(name = "Usuario")
+@Entity
 public class JpaUsuarioEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

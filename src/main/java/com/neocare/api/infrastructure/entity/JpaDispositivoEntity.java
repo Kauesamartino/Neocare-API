@@ -4,7 +4,7 @@ import com.neocare.api.domain.enums.TipoDispositivo;
 import jakarta.persistence.*;
 
 @Table(name = "dispositivo")
-@Entity(name = "Dispositivo")
+@Entity
 public class JpaDispositivoEntity {
 
     @Id @GeneratedValue(strategy= GenerationType.IDENTITY)
