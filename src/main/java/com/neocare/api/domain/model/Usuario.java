@@ -31,16 +31,16 @@ public class Usuario {
     private Boolean ativo;
 
     public Usuario(String nome, String sobrenome, String cpf, String email, String telefone, LocalDate dataNascimento, Sexo sexo, Integer altura, Double peso, Endereco endereco, Boolean ativo) {
-        this.nome = nome;
-        this.sobrenome = sobrenome;
-        this.cpf = cpf;
-        this.email = email;
-        this.telefone = telefone;
-        this.dataNascimento = dataNascimento;
-        this.sexo = sexo;
-        this.altura = altura;
-        this.peso = peso;
-        this.endereco = endereco;
+        setNome(nome);
+        setSobrenome(sobrenome);
+        setCpf(cpf);
+        setEmail(email);
+        setTelefone(telefone);
+        setDataNascimento(dataNascimento);
+        setSexo(sexo);
+        setAltura(altura);
+        setPeso(peso);
+        setEndereco(endereco);
         this.ativo = ativo;
     }
 
