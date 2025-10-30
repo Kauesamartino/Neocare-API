@@ -2,7 +2,6 @@ package com.neocare.api.domain.model;
 
 import com.neocare.api.domain.enums.TipoMedicao;
 
-import java.time.LocalDateTime;
 
 public class MedicaoVital extends Medicao {
 
@@ -14,7 +13,11 @@ public class MedicaoVital extends Medicao {
 
     private Integer pressaoDiastolica;
 
-    public MedicaoVital(String nomeUsuario, String tipoDispositivo, TipoMedicao tipoMedicao) {
-        super(nomeUsuario, tipoDispositivo, tipoMedicao);
+    public MedicaoVital(Long idUsuario, Long idDispositivo, TipoMedicao tipoMedicao, Integer batimentosPorMinuto, Double oxigenacaoSangue, Integer pressaoSistolica, Integer pressaoDiastolica) {
+        super(idUsuario, idDispositivo, tipoMedicao);
+        this.batimentosPorMinuto = batimentosPorMinuto;
+        this.oxigenacaoSangue = oxigenacaoSangue;
+        this.pressaoSistolica = pressaoSistolica;
+        this.pressaoDiastolica = pressaoDiastolica;
     }
 }
