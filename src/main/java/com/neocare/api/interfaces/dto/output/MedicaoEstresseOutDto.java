@@ -1,17 +1,14 @@
-package com.neocare.api.domain.model;
+package com.neocare.api.interfaces.dto.output;
 
-import com.neocare.api.domain.enums.TipoMedicao;
-
-public class MedicaoEstresse extends Medicao {
-
+public class MedicaoEstresseOutDto {
     private Double variacaoFrequenciaCardiaca;
-
     private Double condutividadePele;
+    private MedicaoOutDto medicaoOutDto;
 
-    public MedicaoEstresse(Long idUsuario, Long idDispositivo, TipoMedicao tipoMedicao, Double variacaoFrequenciaCardiaca, Double condutividadePele) {
-        super(idUsuario, idDispositivo, tipoMedicao);
+    public MedicaoEstresseOutDto(Double variacaoFrequenciaCardiaca, Double condutividadePele, MedicaoOutDto medicaoOutDto) {
         this.variacaoFrequenciaCardiaca = variacaoFrequenciaCardiaca;
         this.condutividadePele = condutividadePele;
+        this.medicaoOutDto = medicaoOutDto;
     }
 
     public Double getVariacaoFrequenciaCardiaca() {
@@ -28,5 +25,13 @@ public class MedicaoEstresse extends Medicao {
 
     public void setCondutividadePele(Double condutividadePele) {
         this.condutividadePele = condutividadePele;
+    }
+
+    public MedicaoOutDto getMedicaoOutDto() {
+        return medicaoOutDto;
+    }
+
+    public void setMedicaoOutDto(MedicaoOutDto medicaoOutDto) {
+        this.medicaoOutDto = medicaoOutDto;
     }
 }

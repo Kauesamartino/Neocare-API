@@ -6,27 +6,27 @@ import java.time.LocalDateTime;
 
 public class Medicao {
 
-    private String nomeUsuario;
+    private Long idUsuario;
 
-    private String tipoDispositivo;
+    private Long idDispositivo;
 
     private LocalDateTime dataMedicao;
 
     private TipoMedicao tipoMedicao;
 
-    public Medicao(String nomeUsuario, String tipoDispositivo, TipoMedicao tipoMedicao) {
-        this.nomeUsuario = nomeUsuario;
-        this.tipoDispositivo = tipoDispositivo;
-        this.dataMedicao = LocalDateTime.now();
+    public Medicao(Long idUsuario, Long idDispositivo, TipoMedicao tipoMedicao) {
+        this.idUsuario = idUsuario;
+        this.idDispositivo = idDispositivo;
+        this.dataMedicao =LocalDateTime.now();
         this.tipoMedicao = tipoMedicao;
     }
 
-    public void setNomeUsuario(String nomeUsuario) {
-        this.nomeUsuario = nomeUsuario;
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
-    public void setTipoDispositivo(String tipoDispositivo) {
-        this.tipoDispositivo = tipoDispositivo;
+    public void setIdDispositivo(Long idDispositivo) {
+        this.idDispositivo = idDispositivo;
     }
 
     public void setDataMedicao(LocalDateTime dataMedicao) {
