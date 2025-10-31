@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 
 public class Medicao {
 
+    private Long id;
+
     private Long idUsuario;
 
     private Long idDispositivo;
