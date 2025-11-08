@@ -3,7 +3,7 @@ package com.neocare.api.application.usecase.usuario;
 import com.neocare.api.domain.model.Usuario;
 import com.neocare.api.domain.repository.UsuarioRepository;
 
-public class LocalizarUsuarioPorIdUseCaseImpl implements LocalizarUsuarioPorIdUseCase {
+public final class LocalizarUsuarioPorIdUseCaseImpl implements LocalizarUsuarioPorIdUseCase {
 
     private final UsuarioRepository usuarioRepository;
 

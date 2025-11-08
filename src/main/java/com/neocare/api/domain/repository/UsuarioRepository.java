@@ -14,4 +14,6 @@ public interface UsuarioRepository {
     Usuario update(Usuario usuario);
 
     void desativar(String cpf);
+
+    Usuario findById(Long idUsuario);
 }
