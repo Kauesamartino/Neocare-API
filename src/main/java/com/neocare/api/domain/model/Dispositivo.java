@@ -4,6 +4,7 @@ import com.neocare.api.domain.exception.ValidacaoDominioException;
 import com.neocare.api.domain.enums.TipoDispositivo;
 
 public class Dispositivo {
+    private Long id;
 
     private Long usuarioId;
 
@@ -49,5 +50,25 @@ public class Dispositivo {
         if (enderecoDisp == null || enderecoDisp.isEmpty()) {
             throw new ValidacaoDominioException("Número de série não pode ser vazio");
         }
+    }
+
+    public Long getUsuarioId() {
+        return usuarioId;
+    }
+
+    public TipoDispositivo getTipoDispositivo() {
+        return tipoDispositivo;
+    }
+
+    public String getEnderecoDisp() {
+        return enderecoDisp;
+    }
+
+    public Boolean getAtivo() {
+        return ativo;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

@@ -12,6 +12,14 @@ public class MedicaoOutDto {
     private LocalDateTime dataMedicao;
     private TipoMedicao tipoMedicao;
 
+    public MedicaoOutDto(Long id, String nomeUsuario, DispositivoMedicaoOutDto dispositivoMedicaoOutDto, LocalDateTime dataMedicao, TipoMedicao tipoMedicao) {
+        this.id = id;
+        this.nomeUsuario = nomeUsuario;
+        this.dispositivo = dispositivoMedicaoOutDto;
+        this.dataMedicao = dataMedicao;
+        this.tipoMedicao = tipoMedicao;
+    }
+
     public Long getId() {
         return id;
     }

@@ -38,4 +38,24 @@ public class Medicao {
     public void setTipoMedicao(TipoMedicao tipoMedicao) {
         this.tipoMedicao = tipoMedicao;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Long getIdUsuario() {
+        return idUsuario;
+    }
+
+    public Long getIdDispositivo() {
+        return idDispositivo;
+    }
+
+    public LocalDateTime getDataMedicao() {
+        return dataMedicao;
+    }
+
+    public TipoMedicao getTipoMedicao() {
+        return tipoMedicao;
+    }
 }

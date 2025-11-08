@@ -7,4 +7,11 @@ public class DispositivoMedicaoOutDto {
     private TipoDispositivo tipoDispositivo;
     private String enderecoDisp;
     private Boolean ativo;
+
+    public DispositivoMedicaoOutDto(Long id, TipoDispositivo tipoDispositivo, String enderecoDisp, Boolean ativo) {
+        this.id = id;
+        this.tipoDispositivo = tipoDispositivo;
+        this.enderecoDisp = enderecoDisp;
+        this.ativo = ativo;
+    }
 }
