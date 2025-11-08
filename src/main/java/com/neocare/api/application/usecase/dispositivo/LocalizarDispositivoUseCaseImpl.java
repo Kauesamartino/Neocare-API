@@ -14,7 +14,7 @@ public final class LocalizarDispositivoUseCaseImpl implements LocalizarDispositi
     }
 
     @Override
-    public Dispositivo findById(Long id) {
+    public Dispositivo execute(Long id) {
         try{
             return dispositivoRepository.findById(id);
         } catch (EntidadeNaoEncontradaException e) {

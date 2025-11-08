@@ -4,6 +4,6 @@ import com.neocare.api.domain.model.Dispositivo;
 
 public interface LocalizarDispositivoUseCase {
 
-    Dispositivo findById(Long id);
+    Dispositivo execute(Long id);
 
 }
