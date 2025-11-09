@@ -16,5 +16,10 @@ CREATE TABLE usuario (
                          complemento VARCHAR(100),
                          cidade VARCHAR(100),
                          uf VARCHAR(2),
-                         ativo BOOLEAN NOT NULL DEFAULT TRUE
+                         ativo BOOLEAN NOT NULL DEFAULT TRUE,
+                         credenciais_id BIGINT NOT NULL,
+                         CONSTRAINT fk_usuario_credenciais
+                         FOREIGN KEY (credenciais_id)
+                         REFERENCES credenciais(id)
+                         ON DELETE CASCADE
 );
