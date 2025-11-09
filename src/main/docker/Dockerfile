@@ -13,6 +13,8 @@ RUN mvn dependency:go-offline
 # Copia o resto do código-fonte da sua aplicação
 COPY src ./src
 
+RUN mvn package -DskipTests
+
 
 # ESTÁGIO 2: Execução da Aplicação
 # Usamos uma imagem leve, apenas com o Java para rodar.
