@@ -27,7 +27,7 @@ public class MedicaoRestController {
         this.medicaoController = medicaoController;
     }
 
-    @PostMapping
+    @PostMapping("/medicao_estresse")
     public ResponseEntity<MedicaoEstresseOutDto> registrarMedicaoEstresse(@RequestBody MedicaoEstresseInDto medicaoEstresseInDto, UriComponentsBuilder uriComponentsBuilder){
         final MedicaoEstresseOutDto medicaoEstresseOutDto = medicaoController.registrarMedicaoEstresse(medicaoEstresseInDto);
         URI uri = uriComponentsBuilder.path("/medicoes/medicao_estresse/{id}").buildAndExpand(medicaoEstresseOutDto.getMedicaoOutDto().getId()).toUri();
