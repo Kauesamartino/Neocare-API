@@ -39,4 +39,9 @@ public class UsuarioUseCasesConfig {
     public DesativarUsuarioUseCase desativarUsuarioUseCase() {
         return new DesativarUsuarioUseCaseImpl(usuarioRepository, localizarUsuarioUseCase());
     }
+
+    @Bean
+    public LocalizarUsuarioPorIdUseCase localizarUsuarioPorIdUseCase() {
+        return new LocalizarUsuarioPorIdUseCaseImpl(usuarioRepository);
+    }
 }
