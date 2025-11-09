@@ -1,6 +1,5 @@
 package com.neocare.api.domain.model;
 
-import com.neocare.api.infrastructure.entity.JpaRoleEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
