@@ -19,7 +19,15 @@ public class Medicao {
     public Medicao(Long idUsuario, Long idDispositivo, TipoMedicao tipoMedicao) {
         this.idUsuario = idUsuario;
         this.idDispositivo = idDispositivo;
-        this.dataMedicao =LocalDateTime.now();
+        this.dataMedicao = LocalDateTime.now();
+        this.tipoMedicao = tipoMedicao;
+    }
+
+    public Medicao(Long id, Long idUsuario, Long idDispositivo, LocalDateTime dataMedicao, TipoMedicao tipoMedicao) {
+        this.id = id;
+        this.idUsuario = idUsuario;
+        this.idDispositivo = idDispositivo;
+        this.dataMedicao = dataMedicao;
         this.tipoMedicao = tipoMedicao;
     }
 
@@ -39,10 +47,6 @@ public class Medicao {
         this.tipoMedicao = tipoMedicao;
     }
 
-    public Long getId() {
-        return id;
-    }
-
     public Long getIdUsuario() {
         return idUsuario;
     }
@@ -57,5 +61,9 @@ public class Medicao {
 
     public TipoMedicao getTipoMedicao() {
         return tipoMedicao;
+    }
+
+    public Long getId() {
+        return id;
     }
 }
