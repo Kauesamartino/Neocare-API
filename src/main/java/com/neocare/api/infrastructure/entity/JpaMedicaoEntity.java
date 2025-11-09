@@ -66,4 +66,8 @@ public class JpaMedicaoEntity {
     public void setTipoMedicao(TipoMedicao tipoMedicao) {
         this.tipoMedicao = tipoMedicao;
     }
+
+    public Long getId() {
+        return id;
+    }
 }

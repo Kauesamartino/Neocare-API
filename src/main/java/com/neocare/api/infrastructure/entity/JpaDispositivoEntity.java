@@ -46,4 +46,8 @@ public class JpaDispositivoEntity {
     public Boolean getAtivo() {
         return ativo;
     }
+
+    public Long getId() {
+        return id;
+    }
 }
