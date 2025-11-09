@@ -2,25 +2,37 @@ package com.neocare.api.infrastructure.persistance;
 
 import com.neocare.api.application.exception.EntidadeNaoEncontradaException;
 import com.neocare.api.domain.logging.Logger;
+import com.neocare.api.domain.model.Credenciais;
 import com.neocare.api.domain.model.Usuario;
+import com.neocare.api.domain.repository.CredenciaisRepository;
 import com.neocare.api.domain.repository.UsuarioRepository;
+import com.neocare.api.infrastructure.entity.JpaCredenciaisEntity;
+import com.neocare.api.infrastructure.entity.JpaRoleEntity;
 import com.neocare.api.infrastructure.entity.JpaUsuarioEntity;
 import com.neocare.api.infrastructure.exception.InfraestruturaException;
+import com.neocare.api.infrastructure.repository.JpaCredenciaisRepository;
+import com.neocare.api.infrastructure.repository.JpaRoleRepository;
 import com.neocare.api.infrastructure.repository.JpaUsuarioRepository;
+import com.neocare.api.interfaces.mapper.CredenciaisMapper;
 import com.neocare.api.interfaces.mapper.UsuarioMapper;
 import org.springframework.dao.DataAccessException;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 
 public class UsuarioRepositoryAdapter implements UsuarioRepository {
 
     private final JpaUsuarioRepository jpaUsuarioRepository;
+    private final JpaCredenciaisRepository jpaCredenciaisRepository;
+    private final JpaRoleRepository jpaRoleRepository;
     private final Logger logger;
 
-    public UsuarioRepositoryAdapter(JpaUsuarioRepository jpaUsuarioRepository, Logger logger) {
+    public UsuarioRepositoryAdapter(JpaUsuarioRepository jpaUsuarioRepository, JpaCredenciaisRepository jpaCredenciaisRepository, JpaRoleRepository jpaRoleRepository, Logger logger) {
         this.jpaUsuarioRepository = jpaUsuarioRepository;
+        this.jpaCredenciaisRepository = jpaCredenciaisRepository;
+        this.jpaRoleRepository = jpaRoleRepository;
         this.logger = logger;
     }
 
@@ -31,6 +43,20 @@ public class UsuarioRepositoryAdapter implements UsuarioRepository {
         JpaUsuarioEntity entity = UsuarioMapper.toJpa(usuario);
 
         try{
+            Credenciais credenciais = new Credenciais(
+                    usuario.getCredenciais().getUsername(),
+                    usuario.getCredenciais().getPassword(),
+                    usuario.getNome() + " " + usuario.getSobrenome()
+            );
+
+            JpaRoleEntity roleEntity = jpaRoleRepository.findByName("ROLE_USER")
+                    .orElseThrow(() -> new InfraestruturaException("Role padrão ROLE_USER não encontrada"));
+
+            JpaCredenciaisEntity credenciaisEntity = CredenciaisMapper.toEntity(credenciais, roleEntity);
+            JpaCredenciaisEntity savedCredenciais = jpaCredenciaisRepository.save(credenciaisEntity);
+
+            entity.setCredenciais(savedCredenciais);
+
             JpaUsuarioEntity savedEntity = jpaUsuarioRepository.save(entity);
 
             logger.info("Usuario salvo com sucesso: " + usuario.getCpf());
@@ -52,7 +78,7 @@ public class UsuarioRepositoryAdapter implements UsuarioRepository {
             return UsuarioMapper.entityToDomain(entity);
         } catch (DataAccessException e){
             logger.error("Erro ao buscar usuario: " + e.getMessage(), e);
-            throw new InfraestruturaException("Erro ao buscar usuario por cpf: " + e.getMessage(), e);
+            throw new EntidadeNaoEncontradaException("Erro ao buscar usuario por cpf: " + e.getMessage());
         }
     }
 
