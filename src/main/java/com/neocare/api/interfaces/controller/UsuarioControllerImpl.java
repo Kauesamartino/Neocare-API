@@ -27,12 +27,13 @@ public final class UsuarioControllerImpl implements UsuarioController {
     private final LocalizarUsuarioPorUsernameUseCase localizarUsuarioPorUsername;
 
     public UsuarioControllerImpl(CriarUsuarioUseCase criarUsuarioUseCase, LocalizarUsuarioUseCase localizarUsuarioUseCase,
-                                 LocalizarTodosOsUsuariosUseCase localizarTodosOsUsuariosUseCase, EditarUsuarioUseCase editarUsuarioUseCase, DesativarUsuarioUseCase desativarUsuarioUseCase) {
+                                 LocalizarTodosOsUsuariosUseCase localizarTodosOsUsuariosUseCase, EditarUsuarioUseCase editarUsuarioUseCase, DesativarUsuarioUseCase desativarUsuarioUseCase, LocalizarUsuarioPorUsernameUseCase localizarUsuarioPorUsername) {
         this.editarUsuarioUseCase = editarUsuarioUseCase;
         this.criarUsuarioUseCase = criarUsuarioUseCase;
         this.localizarUsuarioUseCase = localizarUsuarioUseCase;
         this.localizarTodosOsUsuariosUseCase = localizarTodosOsUsuariosUseCase;
         this.desativarUsuarioUseCase = desativarUsuarioUseCase;
+        this.localizarUsuarioPorUsername = localizarUsuarioPorUsername;
     }
 
     @Override

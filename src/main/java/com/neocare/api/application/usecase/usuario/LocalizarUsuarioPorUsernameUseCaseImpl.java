@@ -12,7 +12,7 @@ public final class LocalizarUsuarioPorUsernameUseCaseImpl implements LocalizarUs
     }
 
     @Override
-    public Usuario localizarUsuarioPorUsername(String username) {
+    public Usuario execute(String username) {
         return usuarioRepository.findByUsername(username);
     }
 }

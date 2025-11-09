@@ -4,6 +4,5 @@ import com.neocare.api.domain.model.Usuario;
 
 public interface LocalizarUsuarioPorUsernameUseCase {
 
-    Usuario localizarUsuarioPorUsername(String username);
-
+    Usuario execute(String username);
 }

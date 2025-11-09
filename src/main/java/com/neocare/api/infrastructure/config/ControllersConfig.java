@@ -14,18 +14,14 @@ public class ControllersConfig {
 
     @Bean
     public UsuarioController usuarioController(
-            CriarUsuarioUseCase criarUsuarioUseCase,
-            LocalizarUsuarioUseCase localizarUsuarioUseCase,
-            LocalizarTodosOsUsuariosUseCase localizarTodosOsUsuariosUseCase,
-            EditarUsuarioUseCase editarUsuarioUseCase,
-            DesativarUsuarioUseCase desativarUsuarioUseCase
+            CriarUsuarioUseCase criarUsuarioUseCase, LocalizarUsuarioUseCase localizarUsuarioUseCase,
+            LocalizarTodosOsUsuariosUseCase localizarTodosOsUsuariosUseCase, EditarUsuarioUseCase editarUsuarioUseCase,
+            DesativarUsuarioUseCase desativarUsuarioUseCase, LocalizarUsuarioPorUsernameUseCase localizarUsuarioPorUsernameUseCase
     ){
         return new UsuarioControllerImpl(
-                criarUsuarioUseCase,
-                localizarUsuarioUseCase,
-                localizarTodosOsUsuariosUseCase,
-                editarUsuarioUseCase,
-                desativarUsuarioUseCase);
+                criarUsuarioUseCase, localizarUsuarioUseCase,
+                localizarTodosOsUsuariosUseCase, editarUsuarioUseCase,
+                desativarUsuarioUseCase, localizarUsuarioPorUsernameUseCase);
     }
 
     @Bean
