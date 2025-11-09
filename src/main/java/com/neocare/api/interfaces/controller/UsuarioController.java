@@ -51,4 +51,12 @@ public interface UsuarioController {
      * @param cpf do usuário a ser desativado
      */
     void desativarUsuario(String cpf);
+
+    /**
+     * Localizar um usuário por username
+     *
+     * @param username do usuário a ser buscado
+     * @return dados do usuário
+     */
+    UsuarioOutputDTO localizarUsuarioPorUsername(String username);
 }

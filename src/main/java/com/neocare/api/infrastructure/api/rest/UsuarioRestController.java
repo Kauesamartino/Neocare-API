@@ -58,4 +58,10 @@ public class UsuarioRestController {
         this.usuarioController.desativarUsuario(cpf);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/{username}")
+    public ResponseEntity<UsuarioOutputDTO> buscarUsuarioPorUsername(@PathVariable String username){
+        final UsuarioOutputDTO usuarioOutputDTO = this.usuarioController.localizarUsuarioPorUsername(username);
+        return ResponseEntity.ok(usuarioOutputDTO);
+    }
 }

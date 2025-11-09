@@ -1,5 +1,6 @@
 package com.neocare.api.infrastructure.repository;
 
+import com.neocare.api.infrastructure.entity.JpaCredenciaisEntity;
 import com.neocare.api.infrastructure.entity.JpaUsuarioEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -11,4 +12,6 @@ public interface JpaUsuarioRepository extends JpaRepository<JpaUsuarioEntity, Lo
     Optional<JpaUsuarioEntity> findByCpf(String cpf);
 
     List<JpaUsuarioEntity> findAllByAtivoTrue();
+
+    Optional<JpaUsuarioEntity> findByCredenciais(JpaCredenciaisEntity credenciais);
 }

@@ -47,4 +47,9 @@ public class UsuarioUseCasesConfig {
     public LocalizarUsuarioPorIdUseCase localizarUsuarioPorIdUseCase() {
         return new LocalizarUsuarioPorIdUseCaseImpl(usuarioRepository);
     }
+
+    @Bean
+    public LocalizarUsuarioPorUsernameUseCase localizarUsuarioPorUsernameUseCase() {
+        return new LocalizarUsuarioPorUsernameUseCaseImpl(usuarioRepository);
+    }
 }

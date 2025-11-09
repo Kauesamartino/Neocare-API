@@ -1,5 +1,6 @@
 package com.neocare.api.interfaces.controller;
 
+import com.neocare.api.application.usecase.usuario.LocalizarUsuarioPorUsernameUseCase;
 import com.neocare.api.application.usecase.usuario.*;
 import com.neocare.api.domain.model.Usuario;
 import com.neocare.api.interfaces.dto.input.UsuarioAtualizacaoInputDTO;
@@ -23,6 +24,7 @@ public final class UsuarioControllerImpl implements UsuarioController {
     private final LocalizarTodosOsUsuariosUseCase localizarTodosOsUsuariosUseCase;
     private final EditarUsuarioUseCase editarUsuarioUseCase;
     private final DesativarUsuarioUseCase desativarUsuarioUseCase;
+    private final LocalizarUsuarioPorUsernameUseCase localizarUsuarioPorUsername;
 
     public UsuarioControllerImpl(CriarUsuarioUseCase criarUsuarioUseCase, LocalizarUsuarioUseCase localizarUsuarioUseCase,
                                  LocalizarTodosOsUsuariosUseCase localizarTodosOsUsuariosUseCase, EditarUsuarioUseCase editarUsuarioUseCase, DesativarUsuarioUseCase desativarUsuarioUseCase) {
@@ -66,5 +68,11 @@ public final class UsuarioControllerImpl implements UsuarioController {
     @Override
     public void desativarUsuario(String cpf) {
         desativarUsuarioUseCase.execute(cpf);
+    }
+
+    @Override
+    public UsuarioOutputDTO localizarUsuarioPorUsername(String username) {
+        Usuario usuario = localizarUsuarioPorUsername.execute(username);
+        return UsuarioMapper.toOutputDTO(usuario);
     }
 }
