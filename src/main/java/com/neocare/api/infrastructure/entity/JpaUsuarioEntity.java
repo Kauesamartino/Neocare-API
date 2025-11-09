@@ -35,7 +35,11 @@ public class JpaUsuarioEntity {
 
     private Boolean ativo;
 
-    protected JpaUsuarioEntity() {
+    @OneToOne(cascade = CascadeType.ALL, optional = false)
+    @JoinColumn(name = "credenciais_id", nullable = false)
+    private JpaCredenciaisEntity credenciais;
+
+    public JpaUsuarioEntity() {
     }
 
     public JpaUsuarioEntity(String nome, String sobrenome, String cpf, String email, String telefone, LocalDate dataNascimento, Sexo sexo, Integer altura, Double peso, Endereco endereco, Boolean ativo) {
@@ -277,5 +281,13 @@ public class JpaUsuarioEntity {
 
     public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
+    }
+
+    public JpaCredenciaisEntity getCredenciais() {
+        return credenciais;
+    }
+
+    public void setCredenciais(JpaCredenciaisEntity credenciais) {
+        this.credenciais = credenciais;
     }
 }
