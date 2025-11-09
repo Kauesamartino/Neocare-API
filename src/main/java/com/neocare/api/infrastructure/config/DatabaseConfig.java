@@ -1,13 +1,11 @@
 package com.neocare.api.infrastructure.config;
 
-import com.neocare.api.domain.repository.DispositivoRepository;
-import com.neocare.api.domain.repository.UsuarioRepository;
-import com.neocare.api.infrastructure.persistance.DispositivoRepositoryAdapter;
-import com.neocare.api.infrastructure.persistance.UsuarioRepositoryAdapter;
-import com.neocare.api.infrastructure.repository.JpaDispositivoRepository;
-import com.neocare.api.infrastructure.repository.JpaUsuarioRepository;
+import com.neocare.api.domain.repository.*;
+import com.neocare.api.infrastructure.persistance.*;
+import com.neocare.api.infrastructure.repository.*;
 import com.neocare.api.domain.logging.Logger;
 import com.neocare.api.infrastructure.logging.LoggerFactory;
+import com.neocare.api.infrastructure.services.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,9 +13,9 @@ import org.springframework.context.annotation.Configuration;
 public class DatabaseConfig {
 
     @Bean
-    public UsuarioRepository clienteRepository(JpaUsuarioRepository jpaUsuarioRepository) {
+    public UsuarioRepository clienteRepository(JpaUsuarioRepository jpaUsuarioRepository, JpaCredenciaisRepository jpaCredenciaisRepository, JpaRoleRepository jpaRoleRepository) {
         final Logger logger = LoggerFactory.getLogger(UsuarioRepositoryAdapter.class);
-        return new UsuarioRepositoryAdapter(jpaUsuarioRepository, logger);
+        return new UsuarioRepositoryAdapter(jpaUsuarioRepository, jpaCredenciaisRepository, jpaRoleRepository, logger);
     }
 
     @Bean
@@ -26,4 +24,20 @@ public class DatabaseConfig {
         return new DispositivoRepositoryAdapter(jpaDispositivoRepository, logger);
     }
 
+    @Bean
+    public MedicaoEstresseRepository medicaoEstresseRepository (JpaMedicaoEstresseRepository jpaMedicaoEstresseRepository, JpaUsuarioRepository jpaUsuarioRepository, JpaDispositivoRepository jpaDispositivoRepository) {
+        final Logger logger = LoggerFactory.getLogger(DispositivoRepositoryAdapter.class);
+        return new MedicaoEstresseRepositoryAdapter(jpaMedicaoEstresseRepository, jpaUsuarioRepository, jpaDispositivoRepository, logger);
+    }
+
+    @Bean CredenciaisRepository credenciaisRepository(JpaCredenciaisRepository jpaCredenciaisRepository) {
+        final Logger logger = LoggerFactory.getLogger(CustomUserDetailsService.class);
+        return new CredenciaisRepositoryAdapter(jpaCredenciaisRepository, logger);
+    }
+
+    @Bean
+    RoleRepository roleRepository(JpaRoleRepository jpaRoleRepository) {
+        final Logger logger = LoggerFactory.getLogger(UsuarioRepositoryAdapter.class);
+        return new RoleRepositoryAdapter(jpaRoleRepository, logger);
+    }
 }
