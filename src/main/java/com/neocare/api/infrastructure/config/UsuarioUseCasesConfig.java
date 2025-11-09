@@ -2,6 +2,7 @@ package com.neocare.api.infrastructure.config;
 
 import com.neocare.api.application.usecase.usuario.*;
 
+import com.neocare.api.domain.repository.RoleRepository;
 import com.neocare.api.domain.repository.UsuarioRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,14 +11,16 @@ import org.springframework.context.annotation.Configuration;
 public class UsuarioUseCasesConfig {
 
     private final UsuarioRepository usuarioRepository;
+    private final RoleRepository roleRepository;
 
-    public UsuarioUseCasesConfig(UsuarioRepository usuarioRepository) {
+    public UsuarioUseCasesConfig(UsuarioRepository usuarioRepository, RoleRepository roleRepository) {
         this.usuarioRepository = usuarioRepository;
+        this.roleRepository = roleRepository;
     }
 
     @Bean
     public CriarUsuarioUseCase criarUsuarioUseCase() {
-        return new CriarUsuarioUseCaseImpl(localizarUsuarioUseCase(), usuarioRepository);
+        return new CriarUsuarioUseCaseImpl(localizarUsuarioUseCase(), usuarioRepository, roleRepository);
     }
 
     @Bean
