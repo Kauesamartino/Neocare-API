@@ -9,6 +9,7 @@ public record UsuarioInputDTO(
         String sobrenome,
         String cpf,
         String email,
+        CredenciaisInputDTO credenciais,
         String telefone,
         LocalDate dataNascimento,
         Sexo sexo,

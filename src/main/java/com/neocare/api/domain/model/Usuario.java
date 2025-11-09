@@ -30,7 +30,10 @@ public class Usuario {
 
     private Boolean ativo;
 
-    public Usuario(String nome, String sobrenome, String cpf, String email, String telefone, LocalDate dataNascimento, Sexo sexo, Integer altura, Double peso, Endereco endereco, Boolean ativo) {
+    private Credenciais credenciais;
+
+    // Construtor de DTO para domain
+    public Usuario(String nome, String sobrenome, String cpf, String email, String telefone, LocalDate dataNascimento, Sexo sexo, Integer altura, Double peso, Endereco endereco, Credenciais credenciais) {
         setNome(nome);
         setSobrenome(sobrenome);
         setCpf(cpf);
@@ -41,9 +44,11 @@ public class Usuario {
         setAltura(altura);
         setPeso(peso);
         setEndereco(endereco);
-        this.ativo = ativo;
+        setCredenciais(credenciais);
+        this.ativo = true;
     }
 
+    // Construtor para atualizacao de usuario
     public Usuario(String nome, String sobrenome, String cpf, String email, String telefone, LocalDate dataNascimento, Sexo sexo, Integer altura, Double peso, Endereco endereco) {
         setNome(nome);
         setSobrenome(sobrenome);
@@ -56,6 +61,32 @@ public class Usuario {
         setPeso(peso);
         setEndereco(endereco);
         this.ativo = true;
+    }
+
+    // Construtor para mapper entityToDomain
+    public Usuario(String nome, String sobrenome, String cpf, String email, String telefone, LocalDate dataNascimento, Sexo sexo, Integer altura, Double peso, Endereco endereco, Boolean ativo) {
+        this.nome = nome;
+        this.sobrenome = sobrenome;
+        this.cpf = cpf;
+        this.email = email;
+        this.telefone = telefone;
+        this.dataNascimento = dataNascimento;
+        this.sexo = sexo;
+        this.altura = altura;
+        this.peso = peso;
+        this.endereco = endereco;
+        this.ativo = ativo;
+    }
+
+    private void setCredenciais(Credenciais credenciais) {
+        this.credenciais = credenciais;
+        isCredenciaisValidas();
+    }
+
+    private void isCredenciaisValidas() {
+        if (credenciais == null) {
+            throw new ValidacaoDominioException("É necessário informar as credenciais do usuário");
+        }
     }
 
     public void setNome(String nome) {
@@ -262,4 +293,7 @@ public class Usuario {
         return ativo;
     }
 
+    public Credenciais getCredenciais() {
+        return credenciais;
+    }
 }

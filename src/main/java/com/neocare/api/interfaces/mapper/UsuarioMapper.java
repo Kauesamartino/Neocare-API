@@ -1,5 +1,6 @@
 package com.neocare.api.interfaces.mapper;
 
+import com.neocare.api.domain.model.Credenciais;
 import com.neocare.api.domain.model.Endereco;
 import com.neocare.api.domain.model.Usuario;
 import com.neocare.api.infrastructure.entity.JpaUsuarioEntity;
@@ -15,6 +16,12 @@ public final class UsuarioMapper {
     }
 
     public static Usuario toModel(UsuarioInputDTO dto) {
+        Credenciais credenciais = new Credenciais(
+                dto.credenciais().username(),
+                dto.credenciais().password(),
+                dto.nome() + " " +  dto.sobrenome()
+        );
+
         Endereco endereco = toEnderecoModel(
                 dto.endereco().logradouro(),
                 dto.endereco().bairro(),
@@ -35,7 +42,8 @@ public final class UsuarioMapper {
                 dto.sexo(),
                 dto.altura(),
                 dto.peso(),
-                endereco
+                endereco,
+                credenciais
         );
     }
 
