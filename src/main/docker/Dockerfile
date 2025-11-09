@@ -16,7 +16,7 @@ COPY src ./src
 
 # ESTÁGIO 2: Execução da Aplicação
 # Usamos uma imagem leve, apenas com o Java para rodar.
-FROM openjdk:17-slim
+FROM eclipse-temurin:17-jre-alpine
 
 # Define o diretório de trabalho
 WORKDIR /app
