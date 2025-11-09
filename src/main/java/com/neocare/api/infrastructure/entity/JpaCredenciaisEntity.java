@@ -83,4 +83,8 @@ public class JpaCredenciaisEntity {
     public void setRoles(Set<JpaRoleEntity> roles) {
         this.roles = roles;
     }
+
+    public void setPassword(String senhaCriptografada) {
+        this.password = senhaCriptografada;
+    }
 }

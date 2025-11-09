@@ -37,7 +37,16 @@ public class CredenciaisRepositoryAdapter implements CredenciaisRepository {
 
     @Override
     public Optional<Credenciais> findByUsernameWithRoles(String username) {
-        return Optional.empty();
+        logger.info("Buscando credenciais por username: " + username);
+
+        try {
+            JpaCredenciaisEntity jpaCredenciaisEntity = jpaCredenciaisRepository.findByUsernameWithRoles(username);
+            logger.info("Credenciais encontradas para username: " + username);
+            return CredenciaisMapper.jpaEntityToDomain(jpaCredenciaisEntity);
+        } catch (DataAccessException e) {
+            logger.error("Erro ao buscar credenciais: " + e.getMessage(), e);
+            throw new InfraestruturaException("Erro ao buscar credenciais: " + e.getMessage(), e);
+        }
     }
 
     @Override

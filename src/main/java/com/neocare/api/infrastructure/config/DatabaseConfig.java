@@ -8,6 +8,8 @@ import com.neocare.api.infrastructure.logging.LoggerFactory;
 import com.neocare.api.infrastructure.services.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 public class DatabaseConfig {
@@ -15,7 +17,8 @@ public class DatabaseConfig {
     @Bean
     public UsuarioRepository clienteRepository(JpaUsuarioRepository jpaUsuarioRepository, JpaCredenciaisRepository jpaCredenciaisRepository, JpaRoleRepository jpaRoleRepository) {
         final Logger logger = LoggerFactory.getLogger(UsuarioRepositoryAdapter.class);
-        return new UsuarioRepositoryAdapter(jpaUsuarioRepository, jpaCredenciaisRepository, jpaRoleRepository, logger);
+        final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        return new UsuarioRepositoryAdapter(jpaUsuarioRepository, jpaCredenciaisRepository, jpaRoleRepository, passwordEncoder, logger);
     }
 
     @Bean

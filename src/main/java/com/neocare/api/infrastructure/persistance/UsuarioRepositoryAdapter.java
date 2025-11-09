@@ -16,9 +16,9 @@ import com.neocare.api.infrastructure.repository.JpaUsuarioRepository;
 import com.neocare.api.interfaces.mapper.CredenciaisMapper;
 import com.neocare.api.interfaces.mapper.UsuarioMapper;
 import org.springframework.dao.DataAccessException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 
@@ -27,12 +27,14 @@ public class UsuarioRepositoryAdapter implements UsuarioRepository {
     private final JpaUsuarioRepository jpaUsuarioRepository;
     private final JpaCredenciaisRepository jpaCredenciaisRepository;
     private final JpaRoleRepository jpaRoleRepository;
+    private final PasswordEncoder encoder;
     private final Logger logger;
 
-    public UsuarioRepositoryAdapter(JpaUsuarioRepository jpaUsuarioRepository, JpaCredenciaisRepository jpaCredenciaisRepository, JpaRoleRepository jpaRoleRepository, Logger logger) {
+    public UsuarioRepositoryAdapter(JpaUsuarioRepository jpaUsuarioRepository, JpaCredenciaisRepository jpaCredenciaisRepository, JpaRoleRepository jpaRoleRepository, PasswordEncoder encoder, Logger logger) {
         this.jpaUsuarioRepository = jpaUsuarioRepository;
         this.jpaCredenciaisRepository = jpaCredenciaisRepository;
         this.jpaRoleRepository = jpaRoleRepository;
+        this.encoder = encoder;
         this.logger = logger;
     }
 
@@ -53,6 +55,9 @@ public class UsuarioRepositoryAdapter implements UsuarioRepository {
                     .orElseThrow(() -> new InfraestruturaException("Role padrão ROLE_USER não encontrada"));
 
             JpaCredenciaisEntity credenciaisEntity = CredenciaisMapper.toEntity(credenciais, roleEntity);
+
+            String senhaCriptografada = encoder.encode(credenciaisEntity.getPassword());
+            credenciaisEntity.setPassword(senhaCriptografada);
             JpaCredenciaisEntity savedCredenciais = jpaCredenciaisRepository.save(credenciaisEntity);
 
             entity.setCredenciais(savedCredenciais);
