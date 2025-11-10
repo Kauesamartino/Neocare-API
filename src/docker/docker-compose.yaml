@@ -1,0 +1,28 @@
+services:
+  # Serviço do PostgreSQL
+  postgres:
+    image: postgres:17
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: neocare
+      POSTGRES_USER: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  # Serviço da sua API Java
+  api-java:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      # Atualize a URL de conexão para apontar ao PostgreSQL
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/neocare
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 123456
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:

@@ -7,11 +7,11 @@ WORKDIR /app
 
 # Copia primeiro o pom.xml para aproveitar o cache do Docker.
 # Se as dependências não mudarem, o Docker não vai baixá-las de novo.
-COPY pom.xml .
+COPY ../../pom.xml .
 RUN mvn dependency:go-offline
 
 # Copia o resto do código-fonte da sua aplicação
-COPY src ./src
+COPY .. ./src
 
 RUN mvn package -DskipTests
 
