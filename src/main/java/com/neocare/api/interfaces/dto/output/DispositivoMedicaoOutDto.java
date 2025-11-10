@@ -14,4 +14,20 @@ public class DispositivoMedicaoOutDto {
         this.enderecoDisp = enderecoDisp;
         this.ativo = ativo;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public TipoDispositivo getTipoDispositivo() {
+        return tipoDispositivo;
+    }
+
+    public String getEnderecoDisp() {
+        return enderecoDisp;
+    }
+
+    public Boolean getAtivo() {
+        return ativo;
+    }
 }

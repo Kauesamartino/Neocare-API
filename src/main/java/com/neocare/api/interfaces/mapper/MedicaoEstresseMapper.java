@@ -21,9 +21,9 @@ public final class MedicaoEstresseMapper {
         );
     }
 
-    public static MedicaoEstresseOutDto toOutDto(MedicaoEstresse registeredMedicaoEstresse, String nomeUsuario, Dispositivo dispositivo) {
+    public static MedicaoEstresseOutDto toOutDto(MedicaoEstresse registeredMedicaoEstresse, String nomeUsuario, Dispositivo dispositivo, Long idDispositivo) {
         DispositivoMedicaoOutDto dispositivoMedicaoOutDto = new DispositivoMedicaoOutDto(
-                dispositivo.getId(),
+                idDispositivo,
                 dispositivo.getTipoDispositivo(),
                 dispositivo.getEnderecoDisp(),
                 dispositivo.getAtivo()
