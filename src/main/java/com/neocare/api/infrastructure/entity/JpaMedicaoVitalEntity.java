@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Table(name = "medicoes_vitais")
 @Entity
 @PrimaryKeyJoinColumn(name = "medicao_id")
-public class JpaMedicaoVitalEntity extends  JpaMedicaoEntity {
+public class JpaMedicaoVitalEntity extends JpaMedicaoEntity {
 
     private Integer batimentosPorMinuto;
 
