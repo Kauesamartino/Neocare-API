@@ -59,7 +59,7 @@ public class UsuarioRestController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/{username}")
+    @GetMapping("/username/{username}")
     public ResponseEntity<UsuarioOutputDTO> buscarUsuarioPorUsername(@PathVariable String username){
         final UsuarioOutputDTO usuarioOutputDTO = this.usuarioController.localizarUsuarioPorUsername(username);
         return ResponseEntity.ok(usuarioOutputDTO);
