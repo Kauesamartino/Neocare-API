@@ -50,7 +50,7 @@ public class SecurityConfig {
                                 "/v3/api-docs.yaml"
                         ).permitAll()
                         .requestMatchers(HttpMethod.POST, "/usuarios").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/usuarios/username/{username}").hasRole("USER")
+                        .requestMatchers(HttpMethod.GET, "/usuarios/username/{username}").hasAnyRole("USER", "ADMIN")
                         .requestMatchers("/error").permitAll()
                         .anyRequest().authenticated()
                 )
