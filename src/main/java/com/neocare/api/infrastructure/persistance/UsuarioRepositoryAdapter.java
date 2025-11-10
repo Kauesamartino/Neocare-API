@@ -4,7 +4,6 @@ import com.neocare.api.application.exception.EntidadeNaoEncontradaException;
 import com.neocare.api.domain.logging.Logger;
 import com.neocare.api.domain.model.Credenciais;
 import com.neocare.api.domain.model.Usuario;
-import com.neocare.api.domain.repository.CredenciaisRepository;
 import com.neocare.api.domain.repository.UsuarioRepository;
 import com.neocare.api.infrastructure.entity.JpaCredenciaisEntity;
 import com.neocare.api.infrastructure.entity.JpaRoleEntity;
