@@ -49,9 +49,10 @@ public class SecurityConfig {
                                 "/v3/api-docs/**",
                                 "/v3/api-docs.yaml"
                         ).permitAll()
-                        .requestMatchers(HttpMethod.POST, "/usuarios").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/usuarios/username/{username}").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/usuarios", "/medicoes/medicao_estresse", "/medicoes/medicao_vital").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/usuarios/**", "/usuarios").hasAnyRole("USER", "ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/usuarios").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/usuarios/{cpf}").hasRole("ADMIN")
                         .requestMatchers("/error").permitAll()
                         .anyRequest().authenticated()
                 )
