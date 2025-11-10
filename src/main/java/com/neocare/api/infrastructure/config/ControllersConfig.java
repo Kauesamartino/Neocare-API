@@ -2,6 +2,7 @@ package com.neocare.api.infrastructure.config;
 
 import com.neocare.api.application.usecase.dispositivo.LocalizarDispositivoUseCase;
 import com.neocare.api.application.usecase.medicao.estresse.RegistrarMedicaoEstresseUseCase;
+import com.neocare.api.application.usecase.medicao.vital.RegistrarMedicaoVitalUseCase;
 import com.neocare.api.application.usecase.usuario.*;
 import com.neocare.api.infrastructure.security.JwtUtil;
 import com.neocare.api.interfaces.controller.*;
@@ -26,13 +27,12 @@ public class ControllersConfig {
 
     @Bean
     public MedicaoController medicaoController(
-            RegistrarMedicaoEstresseUseCase registrarMedicaoEstresseUseCase,
-            LocalizarUsuarioPorIdUseCase localizarUsuarioPorIdUseCase,
-            LocalizarDispositivoUseCase localizarDispositivoUseCase
+            RegistrarMedicaoEstresseUseCase registrarMedicaoEstresseUseCase, LocalizarUsuarioPorIdUseCase localizarUsuarioPorIdUseCase,
+            LocalizarDispositivoUseCase localizarDispositivoUseCase, RegistrarMedicaoVitalUseCase registrarMedicaoVitalUseCase
     ) {
         return new MedicaoControllerImpl(
                 registrarMedicaoEstresseUseCase, localizarDispositivoUseCase,
-                localizarUsuarioPorIdUseCase
+                localizarUsuarioPorIdUseCase, registrarMedicaoVitalUseCase
         );
     }
 

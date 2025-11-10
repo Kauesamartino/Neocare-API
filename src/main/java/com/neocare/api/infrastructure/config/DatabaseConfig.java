@@ -33,14 +33,20 @@ public class DatabaseConfig {
         return new MedicaoEstresseRepositoryAdapter(jpaMedicaoEstresseRepository, jpaUsuarioRepository, jpaDispositivoRepository, logger);
     }
 
-    @Bean CredenciaisRepository credenciaisRepository(JpaCredenciaisRepository jpaCredenciaisRepository) {
+    @Bean public CredenciaisRepository credenciaisRepository(JpaCredenciaisRepository jpaCredenciaisRepository) {
         final Logger logger = LoggerFactory.getLogger(CustomUserDetailsService.class);
         return new CredenciaisRepositoryAdapter(jpaCredenciaisRepository, logger);
     }
 
     @Bean
-    RoleRepository roleRepository(JpaRoleRepository jpaRoleRepository) {
+    public RoleRepository roleRepository(JpaRoleRepository jpaRoleRepository) {
         final Logger logger = LoggerFactory.getLogger(UsuarioRepositoryAdapter.class);
         return new RoleRepositoryAdapter(jpaRoleRepository, logger);
+    }
+
+    @Bean
+    public MedicaoVitalRepository medicaoVitalRepository(JpaMedicaoVitalRepository jpaMedicaoVitalRepository, JpaUsuarioRepository jpaUsuarioRepository, JpaDispositivoRepository jpaDispositivoRepository) {
+        final Logger logger = LoggerFactory.getLogger(MedicaoVitalRepositoryAdapter.class);
+        return new MedicaoVitalRepositoryAdapter(jpaMedicaoVitalRepository, jpaUsuarioRepository, jpaDispositivoRepository, logger);
     }
 }
