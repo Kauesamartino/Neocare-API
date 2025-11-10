@@ -1,7 +1,9 @@
 package com.neocare.api.interfaces.controller;
 
 import com.neocare.api.interfaces.dto.input.MedicaoEstresseInDto;
+import com.neocare.api.interfaces.dto.input.MedicaoVitalInDto;
 import com.neocare.api.interfaces.dto.output.MedicaoEstresseOutDto;
+import com.neocare.api.interfaces.dto.output.MedicaoVitalOutDto;
 
 public interface MedicaoController {
 
@@ -12,4 +14,12 @@ public interface MedicaoController {
      * @return Dados de saída da medição de estresse registrada.
      */
     MedicaoEstresseOutDto registrarMedicaoEstresse(MedicaoEstresseInDto medicaoEstresseInDto);
+
+    /**
+     * Registra uma nova medição vital.
+     *
+     * @param medicaoVitalInDto Dados de entrada da medição vital.
+     * @return Dados de saída da medição vital registrada.
+     */
+    MedicaoVitalOutDto registrarMedicaoVital(MedicaoVitalInDto medicaoVitalInDto);
 }

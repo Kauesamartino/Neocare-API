@@ -2,7 +2,9 @@ package com.neocare.api.infrastructure.api.rest;
 
 import com.neocare.api.interfaces.controller.MedicaoController;
 import com.neocare.api.interfaces.dto.input.MedicaoEstresseInDto;
+import com.neocare.api.interfaces.dto.input.MedicaoVitalInDto;
 import com.neocare.api.interfaces.dto.output.MedicaoEstresseOutDto;
+import com.neocare.api.interfaces.dto.output.MedicaoVitalOutDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,4 +36,10 @@ public class MedicaoRestController {
         return ResponseEntity.created(uri).body(medicaoEstresseOutDto);
     }
 
+    @PostMapping("/medicao_vital")
+    public ResponseEntity<MedicaoVitalOutDto> registrarMedicaoVital(@RequestBody MedicaoVitalInDto medicaoVitalInDto, UriComponentsBuilder uriComponentsBuilder){
+        final MedicaoVitalOutDto medicaoVitalOutDto = medicaoController.registrarMedicaoVital(medicaoVitalInDto);
+        URI uri = uriComponentsBuilder.path("/medicoes/medicao_vital/{id}").buildAndExpand(medicaoVitalOutDto.medicaoOutDto().getId()).toUri();
+        return ResponseEntity.created(uri).body(medicaoVitalOutDto);
+    }
 }
