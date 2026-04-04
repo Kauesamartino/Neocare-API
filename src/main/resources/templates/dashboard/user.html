@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head th:replace="~{layout/fragments :: head('Dashboard — Neocare')}"></head>
+<body>
+<nav th:replace="~{layout/fragments :: navbar}"></nav>
+
+<main class="container">
+    <h2>Meu Dashboard</h2>
+    <p>Bem-vindo, <strong sec:authentication="name">usuário</strong>!</p>
+    <p>Em breve: suas medições e alertas.</p>
+</main>
+
+<footer th:replace="~{layout/fragments :: footer}"></footer>
+</body>
+</html>

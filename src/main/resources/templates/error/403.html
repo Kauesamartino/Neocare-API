@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/fragments :: head('Acesso Negado — Neocare')}"></head>
+<body class="auth-page">
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="error-page">
+            <h1>403</h1>
+            <p>Você não tem permissão para acessar esta página.</p>
+            <a th:href="@{/dashboard}" class="btn btn-primary">Voltar ao Dashboard</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
