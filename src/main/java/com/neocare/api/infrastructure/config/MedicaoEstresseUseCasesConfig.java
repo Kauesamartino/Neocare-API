@@ -1,5 +1,7 @@
 package com.neocare.api.infrastructure.config;
 
+import com.neocare.api.application.usecase.medicao.estresse.ListarMedicoesEstresseUseCase;
+import com.neocare.api.application.usecase.medicao.estresse.ListarMedicoesEstresseUseCaseImpl;
 import com.neocare.api.application.usecase.medicao.estresse.RegistrarMedicaoEstresseUseCase;
 import com.neocare.api.application.usecase.medicao.estresse.RegistrarMedicaoEstresseUseCaseImpl;
 import com.neocare.api.domain.repository.AlertaRepository;
@@ -23,4 +25,8 @@ public class MedicaoEstresseUseCasesConfig {
         return new RegistrarMedicaoEstresseUseCaseImpl(medicaoEstresseRepository, alertaRepository);
     }
 
+    @Bean
+    public ListarMedicoesEstresseUseCase listarMedicoesEstresseUseCase() {
+        return new ListarMedicoesEstresseUseCaseImpl(medicaoEstresseRepository);
+    }
 }
