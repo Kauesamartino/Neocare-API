@@ -49,4 +49,10 @@ public class DatabaseConfig {
         final Logger logger = LoggerFactory.getLogger(MedicaoVitalRepositoryAdapter.class);
         return new MedicaoVitalRepositoryAdapter(jpaMedicaoVitalRepository, jpaUsuarioRepository, jpaDispositivoRepository, logger);
     }
+
+    @Bean
+    public AlertaRepository alertaRepository(JpaAlertaRepository jpaAlertaRepository, JpaUsuarioRepository jpaUsuarioRepository, JpaMedicaoRepository jpaMedicaoRepository) {
+        final Logger logger = LoggerFactory.getLogger(AlertaRepositoryAdapter.class);
+        return new AlertaRepositoryAdapter(jpaAlertaRepository, jpaUsuarioRepository, jpaMedicaoRepository, logger);
+    }
 }
