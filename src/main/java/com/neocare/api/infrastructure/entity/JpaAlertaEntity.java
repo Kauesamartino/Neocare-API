@@ -45,4 +45,36 @@ public class JpaAlertaEntity {
         this.mensagem = mensagem;
         this.dataNotificacao = dataNotificacao;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public JpaUsuarioEntity getUsuarioEntity() {
+        return usuarioEntity;
+    }
+
+    public JpaMedicaoEntity getMedicaoEntity() {
+        return medicaoEntity;
+    }
+
+    public TipoAlerta getTipoAlerta() {
+        return tipoAlerta;
+    }
+
+    public String getValorDetectado() {
+        return valorDetectado;
+    }
+
+    public Severidade getSeveridade() {
+        return severidade;
+    }
+
+    public String getMensagem() {
+        return mensagem;
+    }
+
+    public LocalDateTime getDataNotificacao() {
+        return dataNotificacao;
+    }
 }
