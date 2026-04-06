@@ -47,4 +47,13 @@ public class MedicaoVitalRepositoryAdapter implements MedicaoVitalRepository {
             throw new InfraestruturaException("Não foi possível salvar a medição vital.", e);
         }
     }
+
+    @Override
+    public java.util.List<MedicaoVital> findByUsuarioId(Long usuarioId) {
+        logger.info("Buscando medições vitais do usuário ID: " + usuarioId);
+        return jpaMedicaoVitalRepository.findByJpaUsuarioEntityIdOrderByDataMedicaoDesc(usuarioId)
+                .stream()
+                .map(MedicaoVitalMapper::jpaToDomain)
+                .collect(java.util.stream.Collectors.toList());
+    }
 }

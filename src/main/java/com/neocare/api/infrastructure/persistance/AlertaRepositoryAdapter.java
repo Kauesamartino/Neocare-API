@@ -12,6 +12,9 @@ import com.neocare.api.infrastructure.repository.JpaMedicaoRepository;
 import com.neocare.api.infrastructure.repository.JpaUsuarioRepository;
 import com.neocare.api.interfaces.mapper.AlertaMapper;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class AlertaRepositoryAdapter implements AlertaRepository {
 
     private final JpaAlertaRepository jpaAlertaRepository;
@@ -43,5 +46,23 @@ public class AlertaRepositoryAdapter implements AlertaRepository {
             logger.error("Erro ao salvar alerta: " + e.getMessage(), e);
             throw new InfraestruturaException("Não foi possível salvar o alerta.", e);
         }
+    }
+
+    @Override
+    public List<Alerta> findByUsuarioId(Long usuarioId) {
+        logger.info("Buscando alertas do usuário ID: " + usuarioId);
+        return jpaAlertaRepository.findByUsuarioEntityIdOrderByDataNotificacaoDesc(usuarioId)
+                .stream()
+                .map(AlertaMapper::toDomain)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Alerta> findAll() {
+        logger.info("Buscando todos os alertas.");
+        return jpaAlertaRepository.findAllByOrderByDataNotificacaoDesc()
+                .stream()
+                .map(AlertaMapper::toDomain)
+                .collect(Collectors.toList());
     }
 }
