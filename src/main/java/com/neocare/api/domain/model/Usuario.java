@@ -8,6 +8,8 @@ import java.util.Objects;
 
 public class Usuario {
 
+    private Long id;
+
     private String nome;
 
     private String sobrenome;
@@ -64,7 +66,8 @@ public class Usuario {
     }
 
     // Construtor para mapper entityToDomain
-    public Usuario(String nome, String sobrenome, String cpf, String email, String telefone, LocalDate dataNascimento, Sexo sexo, Integer altura, Double peso, Endereco endereco, Boolean ativo) {
+    public Usuario(Long id, String nome, String sobrenome, String cpf, String email, String telefone, LocalDate dataNascimento, Sexo sexo, Integer altura, Double peso, Endereco endereco, Boolean ativo) {
+        this.id = id;
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.cpf = cpf;
@@ -247,6 +250,10 @@ public class Usuario {
         if (peso <= 0) {
             throw new ValidacaoDominioException("Peso inválido");
         }
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getNome() {
