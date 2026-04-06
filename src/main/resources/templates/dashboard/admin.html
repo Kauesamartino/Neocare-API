@@ -8,7 +8,88 @@
 <main class="container">
     <h2>Painel Administrativo</h2>
     <p>Bem-vindo, <strong sec:authentication="name">admin</strong>!</p>
-    <p>Em breve: gerenciamento de usuários e medições globais.</p>
+
+    <!-- Cards resumo -->
+    <div class="dashboard-cards">
+        <div class="card card-info">
+            <span class="card-label">Usuários Ativos</span>
+            <span class="card-value" th:text="${#lists.size(usuarios)}">0</span>
+        </div>
+        <div class="card card-danger">
+            <span class="card-label">Alertas Globais</span>
+            <span class="card-value" th:text="${#lists.size(alertas)}">0</span>
+        </div>
+    </div>
+
+    <!-- Alertas Globais -->
+    <section class="dashboard-section">
+        <h3>Alertas Recentes</h3>
+        <div th:if="${#lists.isEmpty(alertas)}" class="empty-state">
+            Nenhum alerta registrado no sistema.
+        </div>
+        <div th:unless="${#lists.isEmpty(alertas)}" class="table-wrapper">
+            <table class="data-table">
+                <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Usuário ID</th>
+                    <th>Tipo</th>
+                    <th>Severidade</th>
+                    <th>Mensagem</th>
+                    <th>Valor</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="a : ${alertas}">
+                    <td th:text="${#temporals.format(a.dataNotificacao, 'dd/MM/yyyy HH:mm')}"></td>
+                    <td th:text="${a.usuarioId}"></td>
+                    <td th:text="${a.tipoAlerta}"></td>
+                    <td>
+                        <span class="badge"
+                              th:classappend="${a.severidade.name() == 'ALTA'} ? 'badge-danger' : 'badge-warning'"
+                              th:text="${a.severidade}"></span>
+                    </td>
+                    <td th:text="${a.mensagem}"></td>
+                    <td th:text="${a.valorDetectado}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Usuários -->
+    <section class="dashboard-section">
+        <h3>Usuários Cadastrados</h3>
+        <div th:if="${#lists.isEmpty(usuarios)}" class="empty-state">
+            Nenhum usuário cadastrado.
+        </div>
+        <div th:unless="${#lists.isEmpty(usuarios)}" class="table-wrapper">
+            <table class="data-table">
+                <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>CPF</th>
+                    <th>Email</th>
+                    <th>Telefone</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="u : ${usuarios}">
+                    <td th:text="${u.nome + ' ' + u.sobrenome}"></td>
+                    <td th:text="${u.cpf}"></td>
+                    <td th:text="${u.email}"></td>
+                    <td th:text="${u.telefone}"></td>
+                    <td>
+                        <span class="badge"
+                              th:classappend="${u.ativo} ? 'badge-success' : 'badge-muted'"
+                              th:text="${u.ativo} ? 'Ativo' : 'Inativo'"></span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
 </main>
 
 <footer th:replace="~{layout/fragments :: footer}"></footer>

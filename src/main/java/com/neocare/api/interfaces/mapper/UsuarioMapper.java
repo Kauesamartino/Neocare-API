@@ -107,6 +107,7 @@ public final class UsuarioMapper {
 
     public static Usuario entityToDomain(JpaUsuarioEntity savedEntity) {
         return new Usuario(
+                savedEntity.getId(),
                 savedEntity.getNome(),
                 savedEntity.getSobrenome(),
                 savedEntity.getCpf(),

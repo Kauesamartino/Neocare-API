@@ -299,3 +299,119 @@ select.form-control {
     margin: 0 auto;
     padding: 2rem 1.5rem;
 }
+
+/* ===== Dashboard ===== */
+.dashboard-cards {
+    display: flex;
+    gap: 1rem;
+    margin: 1.5rem 0;
+    flex-wrap: wrap;
+}
+
+.card {
+    flex: 1;
+    min-width: 160px;
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+    border-left: 4px solid var(--gray-300);
+}
+
+.card-info   { border-left-color: var(--info); }
+.card-success { border-left-color: var(--success); }
+.card-danger  { border-left-color: var(--danger); }
+
+.card-label {
+    font-size: .8rem;
+    font-weight: 600;
+    color: var(--gray-500);
+    text-transform: uppercase;
+    letter-spacing: .5px;
+}
+
+.card-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--gray-900);
+}
+
+.dashboard-section {
+    margin-top: 2rem;
+}
+
+.dashboard-section h3 {
+    font-size: 1.15rem;
+    color: var(--gray-700);
+    margin-bottom: .75rem;
+    padding-bottom: .5rem;
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.empty-state {
+    background: var(--gray-100);
+    color: var(--gray-500);
+    text-align: center;
+    padding: 2rem;
+    border-radius: var(--radius);
+    font-size: .95rem;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.data-table th,
+.data-table td {
+    padding: .65rem 1rem;
+    text-align: left;
+    font-size: .875rem;
+}
+
+.data-table thead {
+    background: var(--gray-100);
+}
+
+.data-table th {
+    font-weight: 600;
+    color: var(--gray-700);
+    white-space: nowrap;
+}
+
+.data-table tbody tr {
+    border-top: 1px solid var(--gray-200);
+}
+
+.data-table tbody tr:hover {
+    background: var(--gray-50);
+}
+
+/* Badges */
+.badge {
+    display: inline-block;
+    padding: .2rem .6rem;
+    border-radius: 999px;
+    font-size: .75rem;
+    font-weight: 600;
+}
+
+.badge-danger  { background: #fef2f2; color: var(--danger); }
+.badge-warning { background: #fffbeb; color: #d97706; }
+.badge-success { background: #f0fdf4; color: var(--success); }
+.badge-muted   { background: var(--gray-100); color: var(--gray-500); }
+
+@media (max-width: 640px) {
+    .dashboard-cards { flex-direction: column; }
+}

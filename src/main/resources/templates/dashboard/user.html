@@ -7,8 +7,109 @@
 
 <main class="container">
     <h2>Meu Dashboard</h2>
-    <p>Bem-vindo, <strong sec:authentication="name">usuário</strong>!</p>
-    <p>Em breve: suas medições e alertas.</p>
+    <p>Bem-vindo, <strong th:text="${usuario.nome + ' ' + usuario.sobrenome}">usuário</strong>!</p>
+
+    <!-- Cards resumo -->
+    <div class="dashboard-cards">
+        <div class="card card-info">
+            <span class="card-label">Medições de Estresse</span>
+            <span class="card-value" th:text="${#lists.size(medicoesEstresse)}">0</span>
+        </div>
+        <div class="card card-success">
+            <span class="card-label">Medições Vitais</span>
+            <span class="card-value" th:text="${#lists.size(medicoesVitais)}">0</span>
+        </div>
+        <div class="card card-danger">
+            <span class="card-label">Alertas</span>
+            <span class="card-value" th:text="${#lists.size(alertas)}">0</span>
+        </div>
+    </div>
+
+    <!-- Medições de Estresse -->
+    <section class="dashboard-section">
+        <h3>Medições de Estresse</h3>
+        <div th:if="${#lists.isEmpty(medicoesEstresse)}" class="empty-state">
+            Nenhuma medição de estresse registrada.
+        </div>
+        <div th:unless="${#lists.isEmpty(medicoesEstresse)}" class="table-wrapper">
+            <table class="data-table">
+                <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>HRV (ms)</th>
+                    <th>GSR (μS)</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="m : ${medicoesEstresse}">
+                    <td th:text="${#temporals.format(m.dataMedicao, 'dd/MM/yyyy HH:mm')}"></td>
+                    <td th:text="${m.variacaoFrequenciaCardiaca}"></td>
+                    <td th:text="${m.condutividadePele}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Medições Vitais -->
+    <section class="dashboard-section">
+        <h3>Medições Vitais</h3>
+        <div th:if="${#lists.isEmpty(medicoesVitais)}" class="empty-state">
+            Nenhuma medição vital registrada.
+        </div>
+        <div th:unless="${#lists.isEmpty(medicoesVitais)}" class="table-wrapper">
+            <table class="data-table">
+                <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>BPM</th>
+                    <th>SpO2 (%)</th>
+                    <th>PA (mmHg)</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="m : ${medicoesVitais}">
+                    <td th:text="${#temporals.format(m.dataMedicao, 'dd/MM/yyyy HH:mm')}"></td>
+                    <td th:text="${m.batimentosPorMinuto}"></td>
+                    <td th:text="${m.oxigenacaoSangue}"></td>
+                    <td th:text="${m.pressaoSistolica + '/' + m.pressaoDiastolica}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Alertas -->
+    <section class="dashboard-section">
+        <h3>Alertas</h3>
+        <div th:if="${#lists.isEmpty(alertas)}" class="empty-state">
+            Nenhum alerta registrado. Tudo certo!
+        </div>
+        <div th:unless="${#lists.isEmpty(alertas)}" class="table-wrapper">
+            <table class="data-table">
+                <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Tipo</th>
+                    <th>Severidade</th>
+                    <th>Mensagem</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="a : ${alertas}">
+                    <td th:text="${#temporals.format(a.dataNotificacao, 'dd/MM/yyyy HH:mm')}"></td>
+                    <td th:text="${a.tipoAlerta}"></td>
+                    <td>
+                        <span class="badge"
+                              th:classappend="${a.severidade.name() == 'ALTA'} ? 'badge-danger' : 'badge-warning'"
+                              th:text="${a.severidade}"></span>
+                    </td>
+                    <td th:text="${a.mensagem}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
 </main>
 
 <footer th:replace="~{layout/fragments :: footer}"></footer>
