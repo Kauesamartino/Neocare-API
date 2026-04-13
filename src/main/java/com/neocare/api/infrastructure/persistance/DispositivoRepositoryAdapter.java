@@ -8,6 +8,9 @@ import com.neocare.api.infrastructure.exception.InfraestruturaException;
 import com.neocare.api.infrastructure.repository.JpaDispositivoRepository;
 import com.neocare.api.interfaces.mapper.DispositivoMapper;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class DispositivoRepositoryAdapter implements DispositivoRepository {
 
     private final JpaDispositivoRepository jpaDispositivoRepository;
@@ -30,5 +33,14 @@ public class DispositivoRepositoryAdapter implements DispositivoRepository {
             logger.error("Erro ao buscar dispositivo: " + e.getMessage(), e);
             throw new InfraestruturaException("Erro ao buscar dispositivo por id: " + e.getMessage(), e);
         }
+    }
+
+    @Override
+    public List<Dispositivo> findByUsuarioId(Long usuarioId) {
+        logger.info("Buscando dispositivos do usuário ID: " + usuarioId);
+        return jpaDispositivoRepository.findByUsuarioEntityId(usuarioId)
+                .stream()
+                .map(DispositivoMapper::jpaEntityToDomain)
+                .collect(Collectors.toList());
     }
 }

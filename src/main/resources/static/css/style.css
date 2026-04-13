@@ -415,3 +415,32 @@ select.form-control {
 @media (max-width: 640px) {
     .dashboard-cards { flex-direction: column; }
 }
+
+/* ===== Page Header ===== */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.page-actions {
+    display: flex;
+    gap: .5rem;
+    flex-wrap: wrap;
+}
+
+/* ===== Form Actions ===== */
+.form-actions {
+    display: flex;
+    gap: .75rem;
+    margin-top: 1rem;
+}
+
+/* ===== Field Error ===== */
+.field-error {
+    color: var(--danger);
+    font-size: .8rem;
+}

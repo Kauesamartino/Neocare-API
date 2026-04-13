@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head th:replace="~{layout/fragments :: head('Nova Medição Vital — Neocare')}"></head>
+<body>
+<nav th:replace="~{layout/fragments :: navbar}"></nav>
+
+<main class="container">
+    <h2>Nova Medição Vital</h2>
+
+    <div th:if="${erro}" class="alert alert-danger" th:text="${erro}"></div>
+
+    <form th:action="@{/medicoes-web/nova-vital}" th:object="${medicaoVitalForm}" method="post" class="auth-form">
+
+        <div class="form-group">
+            <label for="idDispositivo">ID do Dispositivo</label>
+            <input type="number" id="idDispositivo" th:field="*{idDispositivo}"
+                   class="form-control" placeholder="Ex: 1" required>
+            <span class="field-error" th:if="${#fields.hasErrors('idDispositivo')}" th:errors="*{idDispositivo}"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="batimentosPorMinuto">BPM — Batimentos por Minuto</label>
+            <input type="number" id="batimentosPorMinuto" th:field="*{batimentosPorMinuto}"
+                   class="form-control" placeholder="Ex: 80">
+            <span class="field-error" th:if="${#fields.hasErrors('batimentosPorMinuto')}" th:errors="*{batimentosPorMinuto}"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="oxigenacaoSangue">SpO2 — Oxigenação do Sangue (%)</label>
+            <input type="number" step="0.1" id="oxigenacaoSangue" th:field="*{oxigenacaoSangue}"
+                   class="form-control" placeholder="Ex: 98.0">
+            <span class="field-error" th:if="${#fields.hasErrors('oxigenacaoSangue')}" th:errors="*{oxigenacaoSangue}"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="pressaoSistolica">Pressão Sistólica (mmHg)</label>
+            <input type="number" id="pressaoSistolica" th:field="*{pressaoSistolica}"
+                   class="form-control" placeholder="Ex: 120">
+            <span class="field-error" th:if="${#fields.hasErrors('pressaoSistolica')}" th:errors="*{pressaoSistolica}"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="pressaoDiastolica">Pressão Diastólica (mmHg)</label>
+            <input type="number" id="pressaoDiastolica" th:field="*{pressaoDiastolica}"
+                   class="form-control" placeholder="Ex: 80">
+            <span class="field-error" th:if="${#fields.hasErrors('pressaoDiastolica')}" th:errors="*{pressaoDiastolica}"></span>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Registrar Medição</button>
+            <a th:href="@{/medicoes-web}" class="btn btn-outline">Cancelar</a>
+        </div>
+    </form>
+</main>
+
+<footer th:replace="~{layout/fragments :: footer}"></footer>
+</body>
+</html>

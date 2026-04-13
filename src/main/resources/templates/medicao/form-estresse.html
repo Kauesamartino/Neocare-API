@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head th:replace="~{layout/fragments :: head('Nova Medição de Estresse — Neocare')}"></head>
+<body>
+<nav th:replace="~{layout/fragments :: navbar}"></nav>
+
+<main class="container">
+    <h2>Nova Medição de Estresse</h2>
+
+    <div th:if="${erro}" class="alert alert-danger" th:text="${erro}"></div>
+
+    <form th:action="@{/medicoes-web/nova-estresse}" th:object="${medicaoEstresseForm}" method="post" class="auth-form">
+
+        <div class="form-group">
+            <label for="idDispositivo">ID do Dispositivo</label>
+            <input type="number" id="idDispositivo" th:field="*{idDispositivo}"
+                   class="form-control" placeholder="Ex: 1" required>
+            <span class="field-error" th:if="${#fields.hasErrors('idDispositivo')}" th:errors="*{idDispositivo}"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="variacaoFrequenciaCardiaca">HRV — Variação da Frequência Cardíaca (ms)</label>
+            <input type="number" step="0.1" id="variacaoFrequenciaCardiaca" th:field="*{variacaoFrequenciaCardiaca}"
+                   class="form-control" placeholder="Ex: 45.5">
+            <span class="field-error" th:if="${#fields.hasErrors('variacaoFrequenciaCardiaca')}" th:errors="*{variacaoFrequenciaCardiaca}"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="condutividadePele">GSR — Condutividade da Pele (μS)</label>
+            <input type="number" step="0.1" id="condutividadePele" th:field="*{condutividadePele}"
+                   class="form-control" placeholder="Ex: 5.2">
+            <span class="field-error" th:if="${#fields.hasErrors('condutividadePele')}" th:errors="*{condutividadePele}"></span>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Registrar Medição</button>
+            <a th:href="@{/medicoes-web}" class="btn btn-outline">Cancelar</a>
+        </div>
+    </form>
+</main>
+
+<footer th:replace="~{layout/fragments :: footer}"></footer>
+</body>
+</html>

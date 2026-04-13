@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head th:replace="~{layout/fragments :: head('Alertas — Neocare')}"></head>
+<body>
+<nav th:replace="~{layout/fragments :: navbar}"></nav>
+
+<main class="container">
+    <h2 th:text="${isAdmin} ? 'Alertas do Sistema' : 'Meus Alertas'">Alertas</h2>
+
+    <!-- Alertas -->
+    <section class="dashboard-section">
+        <div th:if="${#lists.isEmpty(alertas)}" class="empty-state">
+            Nenhum alerta registrado. Tudo certo!
+        </div>
+        <div th:unless="${#lists.isEmpty(alertas)}" class="table-wrapper">
+            <table class="data-table">
+                <thead>
+                <tr>
+                    <th>Data</th>
+                    <th th:if="${isAdmin}">Usuário ID</th>
+                    <th>Tipo</th>
+                    <th>Severidade</th>
+                    <th>Mensagem</th>
+                    <th>Valor Detectado</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="a : ${alertas}">
+                    <td th:text="${#temporals.format(a.dataNotificacao, 'dd/MM/yyyy HH:mm')}"></td>
+                    <td th:if="${isAdmin}" th:text="${a.usuarioId}"></td>
+                    <td th:text="${a.tipoAlerta}"></td>
+                    <td>
+                        <span class="badge"
+                              th:classappend="${a.severidade.name() == 'ALTA'} ? 'badge-danger' : 'badge-warning'"
+                              th:text="${a.severidade}"></span>
+                    </td>
+                    <td th:text="${a.mensagem}"></td>
+                    <td th:text="${a.valorDetectado}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+
+<footer th:replace="~{layout/fragments :: footer}"></footer>
+</body>
+</html>

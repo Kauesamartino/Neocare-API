@@ -1,5 +1,7 @@
 package com.neocare.api.infrastructure.config;
 
+import com.neocare.api.application.usecase.dispositivo.ListarDispositivosPorUsuarioUseCase;
+import com.neocare.api.application.usecase.dispositivo.ListarDispositivosPorUsuarioUseCaseImpl;
 import com.neocare.api.application.usecase.dispositivo.LocalizarDispositivoUseCase;
 import com.neocare.api.application.usecase.dispositivo.LocalizarDispositivoUseCaseImpl;
 import com.neocare.api.domain.repository.DispositivoRepository;
@@ -18,5 +20,10 @@ public class DispositivoUseCasesConfig {
     @Bean
     public LocalizarDispositivoUseCase localizarDispositivoUseCase() {
         return new LocalizarDispositivoUseCaseImpl(dispositivoRepository);
+    }
+
+    @Bean
+    public ListarDispositivosPorUsuarioUseCase listarDispositivosPorUsuarioUseCase() {
+        return new ListarDispositivosPorUsuarioUseCaseImpl(dispositivoRepository);
     }
 }
