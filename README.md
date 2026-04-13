@@ -3,7 +3,7 @@
 Neocare é uma plataforma completa de monitoramento de estresse e sinais vitais, desenvolvida com **Java 17**, **Spring Boot 3.5.6**, **Thymeleaf**, **Spring Security** (JWT + sessão) e **PostgreSQL**. O projeto segue os princípios da **Clean Architecture** com separação rigorosa de camadas.
 
 ## Para SP De DevOps e Cloud Computing
-Acessar o arquivo [passo-a-passo-cloud.md] com as instruções
+Acessar o arquivo [passo-a-passo-cloud.md](passo-a-passo-cloud.md) com as instruções
 
 ## 📋 Funcionalidades
 
