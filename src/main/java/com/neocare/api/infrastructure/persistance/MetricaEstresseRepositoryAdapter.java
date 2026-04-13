@@ -32,7 +32,7 @@ public class MetricaEstresseRepositoryAdapter implements MetricaEstresseReposito
     public MetricaEstresse save(MetricaEstresse metricaEstresse) {
         logger.info("Salvando métrica de estresse para medição ID: " + metricaEstresse.getMedicaoEstresseId());
         JpaMedicaoEstresseEntity medicaoEntity = jpaMedicaoEstresseRepository
-                .findById(String.valueOf(metricaEstresse.getMedicaoEstresseId()))
+                .findById(metricaEstresse.getMedicaoEstresseId())
                 .orElseThrow(() -> new InfraestruturaException(
                         "Medição de estresse com ID " + metricaEstresse.getMedicaoEstresseId() + " não encontrada."));
 

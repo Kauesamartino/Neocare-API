@@ -87,7 +87,7 @@ public class MedicaoWebController {
             return "redirect:/medicoes-web";
         } catch (Exception e) {
             log.warn("Erro ao registrar medição de estresse: {}", e.getMessage());
-            model.addAttribute("erro", e.getMessage());
+            model.addAttribute("erro", "Não foi possível registrar a medição de estresse. Verifique os dados e tente novamente.");
             return "medicao/form-estresse";
         }
     }
@@ -121,7 +121,7 @@ public class MedicaoWebController {
             return "redirect:/medicoes-web";
         } catch (Exception e) {
             log.warn("Erro ao registrar medição vital: {}", e.getMessage());
-            model.addAttribute("erro", e.getMessage());
+            model.addAttribute("erro", "Não foi possível registrar a medição vital. Verifique os dados e tente novamente.");
             return "medicao/form-vital";
         }
     }

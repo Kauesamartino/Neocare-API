@@ -60,7 +60,7 @@ public class MedicaoEstresseRepositoryAdapter implements MedicaoEstresseReposito
     @Override
     public java.util.Optional<MedicaoEstresse> findById(Long id) {
         logger.info("Buscando medição de estresse por ID: " + id);
-        return jpaMedicaoEstresseRepository.findById(String.valueOf(id))
+        return jpaMedicaoEstresseRepository.findById(id)
                 .map(MedicaoEstresseMapper::jpaToDomain);
     }
 }
