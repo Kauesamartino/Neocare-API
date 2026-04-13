@@ -35,7 +35,7 @@ public class AdminWebController {
             desativarUsuarioUseCase.execute(cpf);
             redirectAttributes.addFlashAttribute("sucesso", "Usuário desativado com sucesso.");
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("erro", "Erro ao desativar usuário: " + e.getMessage());
+            redirectAttributes.addFlashAttribute("erro", "Não foi possível desativar o usuário.");
         }
         return "redirect:/admin/usuarios";
     }

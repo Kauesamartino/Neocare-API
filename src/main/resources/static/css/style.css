@@ -81,6 +81,8 @@ a:hover { text-decoration: underline; }
 
 .nav-logout-form { display: inline; }
 
+.inline-form { display: inline; }
+
 /* ===== Footer ===== */
 .footer {
     text-align: center;

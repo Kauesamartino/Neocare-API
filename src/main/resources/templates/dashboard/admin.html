@@ -88,7 +88,7 @@
                     </td>
                     <td>
                         <form th:if="${u.ativo}" th:action="@{/admin/usuarios/{cpf}/desativar(cpf=${u.cpf})}" method="post"
-                              style="display:inline;"
+                              class="inline-form"
                               onsubmit="return confirm('Deseja realmente desativar este usuário?');">
                             <button type="submit" class="btn btn-sm btn-danger">Desativar</button>
                         </form>
