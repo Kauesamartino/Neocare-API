@@ -81,6 +81,8 @@ a:hover { text-decoration: underline; }
 
 .nav-logout-form { display: inline; }
 
+.inline-form { display: inline; }
+
 /* ===== Footer ===== */
 .footer {
     text-align: center;
@@ -242,6 +244,15 @@ select.form-control {
 }
 .btn-primary:hover {
     background: var(--primary-dark);
+    text-decoration: none;
+}
+
+.btn-danger {
+    background: var(--danger);
+    color: #fff;
+}
+.btn-danger:hover {
+    background: #b91c1c;
     text-decoration: none;
 }
 
