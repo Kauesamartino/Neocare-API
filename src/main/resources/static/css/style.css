@@ -245,6 +245,15 @@ select.form-control {
     text-decoration: none;
 }
 
+.btn-danger {
+    background: var(--danger);
+    color: #fff;
+}
+.btn-danger:hover {
+    background: #b91c1c;
+    text-decoration: none;
+}
+
 .btn-outline {
     background: transparent;
     color: var(--gray-700);

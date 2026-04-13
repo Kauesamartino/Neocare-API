@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head th:replace="~{layout/fragments :: head('Gerenciar Usuários — Neocare')}"></head>
+<body>
+<nav th:replace="~{layout/fragments :: navbar}"></nav>
+
+<main class="container">
+    <div class="page-header">
+        <h2>Gerenciar Usuários</h2>
+    </div>
+
+    <div th:if="${sucesso}" class="alert alert-success" th:text="${sucesso}"></div>
+    <div th:if="${erro}" class="alert alert-danger" th:text="${erro}"></div>
+
+    <div th:if="${#lists.isEmpty(usuarios)}" class="empty-state">
+        Nenhum usuário cadastrado.
+    </div>
+    <div th:unless="${#lists.isEmpty(usuarios)}" class="table-wrapper">
+        <table class="data-table">
+            <thead>
+            <tr>
+                <th>Nome</th>
+                <th>CPF</th>
+                <th>Email</th>
+                <th>Telefone</th>
+                <th>Status</th>
+                <th>Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="u : ${usuarios}">
+                <td th:text="${u.nome + ' ' + u.sobrenome}"></td>
+                <td th:text="${u.cpf}"></td>
+                <td th:text="${u.email}"></td>
+                <td th:text="${u.telefone}"></td>
+                <td>
+                    <span class="badge"
+                          th:classappend="${u.ativo} ? 'badge-success' : 'badge-muted'"
+                          th:text="${u.ativo} ? 'Ativo' : 'Inativo'"></span>
+                </td>
+                <td>
+                    <form th:if="${u.ativo}" th:action="@{/admin/usuarios/{cpf}/desativar(cpf=${u.cpf})}" method="post"
+                          style="display:inline;"
+                          onsubmit="return confirm('Deseja realmente desativar este usuário?');">
+                        <button type="submit" class="btn btn-sm btn-danger">Desativar</button>
+                    </form>
+                    <span th:unless="${u.ativo}" class="badge badge-muted">Desativado</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<footer th:replace="~{layout/fragments :: footer}"></footer>
+</body>
+</html>

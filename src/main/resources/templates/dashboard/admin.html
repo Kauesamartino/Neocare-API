@@ -72,6 +72,7 @@
                     <th>Email</th>
                     <th>Telefone</th>
                     <th>Status</th>
+                    <th>Ações</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -84,6 +85,14 @@
                         <span class="badge"
                               th:classappend="${u.ativo} ? 'badge-success' : 'badge-muted'"
                               th:text="${u.ativo} ? 'Ativo' : 'Inativo'"></span>
+                    </td>
+                    <td>
+                        <form th:if="${u.ativo}" th:action="@{/admin/usuarios/{cpf}/desativar(cpf=${u.cpf})}" method="post"
+                              style="display:inline;"
+                              onsubmit="return confirm('Deseja realmente desativar este usuário?');">
+                            <button type="submit" class="btn btn-sm btn-danger">Desativar</button>
+                        </form>
+                        <span th:unless="${u.ativo}" class="badge badge-muted">Desativado</span>
                     </td>
                 </tr>
                 </tbody>
