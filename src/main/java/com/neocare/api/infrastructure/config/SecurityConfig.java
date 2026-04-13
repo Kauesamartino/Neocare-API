@@ -76,7 +76,7 @@ public class SecurityConfig {
     @Order(2)
     public SecurityFilterChain apiFilterChain(HttpSecurity http, JwtUtil jwtUtil, UserDetailsService userDetailsService) throws Exception {
         http
-                .securityMatcher("/api/**", "/usuarios/**", "/medicoes/**", "/swagger-ui/**", "/v3/api-docs/**")
+                .securityMatcher("/api/**", "/usuarios", "/usuarios/**", "/medicoes", "/medicoes/**", "/swagger-ui/**", "/v3/api-docs/**")
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
@@ -90,8 +90,8 @@ public class SecurityConfig {
                         ).permitAll()
                         .requestMatchers(HttpMethod.POST, "/usuarios", "/medicoes/medicao_estresse", "/medicoes/medicao_vital").permitAll()
                         .requestMatchers(HttpMethod.GET, "/usuarios/**", "/usuarios").hasAnyRole("USER", "ADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/usuarios").hasAnyRole("USER", "ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/usuarios/{cpf}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/usuarios/**", "/usuarios").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/usuarios/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(ex -> ex
