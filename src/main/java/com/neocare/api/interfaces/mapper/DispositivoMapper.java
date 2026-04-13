@@ -5,12 +5,17 @@ import com.neocare.api.infrastructure.entity.JpaDispositivoEntity;
 
 public final class DispositivoMapper {
 
+    private DispositivoMapper() {
+    }
+
     public static Dispositivo jpaEntityToDomain(JpaDispositivoEntity entity) {
-        return new Dispositivo(
+        Dispositivo dispositivo = new Dispositivo(
                 entity.getUsuarioEntity().getId(),
                 entity.getTipoDispositivo(),
                 entity.getEnderecoDisp(),
                 entity.getAtivo()
         );
+        dispositivo.setId(entity.getId());
+        return dispositivo;
     }
 }

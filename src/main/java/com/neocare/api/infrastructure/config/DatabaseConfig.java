@@ -55,4 +55,10 @@ public class DatabaseConfig {
         final Logger logger = LoggerFactory.getLogger(AlertaRepositoryAdapter.class);
         return new AlertaRepositoryAdapter(jpaAlertaRepository, jpaUsuarioRepository, jpaMedicaoRepository, logger);
     }
+
+    @Bean
+    public MetricaEstresseRepository metricaEstresseRepository(JpaMetricaEstresseRepository jpaMetricaEstresseRepository, JpaMedicaoEstresseRepository jpaMedicaoEstresseRepository) {
+        final Logger logger = LoggerFactory.getLogger(MetricaEstresseRepositoryAdapter.class);
+        return new MetricaEstresseRepositoryAdapter(jpaMetricaEstresseRepository, jpaMedicaoEstresseRepository, logger);
+    }
 }

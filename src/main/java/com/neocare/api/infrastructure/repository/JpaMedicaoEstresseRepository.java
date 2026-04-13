@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface JpaMedicaoEstresseRepository extends JpaRepository<JpaMedicaoEstresseEntity, String> {
+public interface JpaMedicaoEstresseRepository extends JpaRepository<JpaMedicaoEstresseEntity, Long> {
     List<JpaMedicaoEstresseEntity> findByJpaUsuarioEntityIdOrderByDataMedicaoDesc(Long usuarioId);
 }

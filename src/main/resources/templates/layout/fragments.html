@@ -18,6 +18,8 @@
 
         <div sec:authorize="isAuthenticated()" class="navbar-links">
             <a th:href="@{/dashboard}" class="nav-link">Dashboard</a>
+            <a th:href="@{/medicoes-web}" class="nav-link">Medições</a>
+            <a th:href="@{/alertas-web}" class="nav-link">Alertas</a>
             <a sec:authorize="hasRole('ADMIN')" th:href="@{/admin/usuarios}" class="nav-link">Usuários</a>
             <span class="nav-user">
                 <span sec:authentication="name">usuário</span>

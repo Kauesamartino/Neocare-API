@@ -72,7 +72,7 @@
                     <td th:text="${#temporals.format(m.dataMedicao, 'dd/MM/yyyy HH:mm')}"></td>
                     <td th:text="${m.batimentosPorMinuto}"></td>
                     <td th:text="${m.oxigenacaoSangue}"></td>
-                    <td th:text="${m.pressaoSistolica + '/' + m.pressaoDiastolica}"></td>
+                    <td th:text="${m.pressaoSistolica != null && m.pressaoDiastolica != null ? m.pressaoSistolica + '/' + m.pressaoDiastolica : '—'}"></td>
                 </tr>
                 </tbody>
             </table>
