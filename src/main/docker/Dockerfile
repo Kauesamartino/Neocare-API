@@ -1,33 +1,49 @@
-# ESTÁGIO 1: Build da Aplicação
-# Usamos uma imagem que já vem com o Maven (ferramenta de build) e o JDK.
+# =========================
+# STAGE 1 - BUILD
+# =========================
 FROM maven:3.8.5-openjdk-17 AS build
 
-# Define o diretório de trabalho
 WORKDIR /app
 
-# Copia primeiro o pom.xml para aproveitar o cache do Docker.
-# Se as dependências não mudarem, o Docker não vai baixá-las de novo.
 COPY pom.xml .
 RUN mvn dependency:go-offline
 
-# Copia o resto do código-fonte da sua aplicação
 COPY src ./src
-
 RUN mvn package -DskipTests
 
 
-# ESTÁGIO 2: Execução da Aplicação
-# Usamos uma imagem leve, apenas com o Java para rodar.
-FROM eclipse-temurin:17-jre-alpine
+# =========================
+# STAGE 2 - RUNTIME
+# =========================
+FROM eclipse-temurin:17-jre
 
-# Define o diretório de trabalho
 WORKDIR /app
 
-# Copia APENAS o arquivo .jar compilado do estágio 'build' para a imagem final.
+# Copia aplicação
 COPY --from=build /app/target/Neocare-API-0.0.1-SNAPSHOT.jar app.jar
 
-# Expõe a porta que a sua aplicação usa
+# Baixa o tracer
+ADD https://dtdg.co/latest-java-tracer /dd-java-agent.jar
+
+# IMPORTANTE: Java agent via ENV (como doc pede)
+ENV JAVA_TOOL_OPTIONS="-javaagent:/dd-java-agent.jar"
+
+# Copia o serverless-init
+COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
+
+# Variáveis Datadog
+ENV DD_SERVICE=neocare-api
+ENV DD_ENV=prod
+ENV DD_VERSION=2.0
+ENV DD_LOGS_ENABLED=true
+ENV DD_TRACE_ENABLED=true
+ENV DD_LOGS_INJECTION=true
+ENV DD_SOURCE=java
+ENV DD_SITE="datadoghq.com"
+ENV DD_AZURE_SUBSCRIPTION_ID="ac16782f-3684-4e4f-8884-deb50b35831c"
+ENV DD_AZURE_RESOURCE_GROUP="neocare"
+
 EXPOSE 8080
 
-# Comando para iniciar a sua aplicação
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["/app/datadog-init"]
+CMD ["java", "-jar", "app.jar"]
