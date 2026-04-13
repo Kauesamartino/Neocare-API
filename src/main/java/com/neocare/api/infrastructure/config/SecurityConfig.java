@@ -92,10 +92,10 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/usuarios/**", "/usuarios").hasAnyRole("USER", "ADMIN")
                         .requestMatchers(HttpMethod.GET, "/medicoes/**").hasAnyRole("USER", "ADMIN")
                         .requestMatchers(HttpMethod.GET, "/api/alertas/usuario/**").hasAnyRole("USER", "ADMIN")
-                        .requestMatchers(HttpMethod.GET, "/api/alertas").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/alertas").hasAnyRole("ADMIN", "USER")
                         .requestMatchers(HttpMethod.GET, "/api/dispositivos/**").hasAnyRole("USER", "ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/usuarios/**", "/usuarios").hasAnyRole("USER", "ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/usuarios/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/usuarios/**").hasAnyRole("ADMIN", "USER")
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(ex -> ex
