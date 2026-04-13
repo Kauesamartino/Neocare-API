@@ -133,42 +133,12 @@ public class Usuario {
     }
 
     private void isCpfValido(String cpf) {
-        //regex valida se cpf só contem numeros
         if (!cpf.matches("\\d{11}")) {
-            throw new ValidacaoDominioException("CPF deve conter apenas números");
+            throw new ValidacaoDominioException("CPF deve conter 11 dígitos numéricos");
         }
 
-        // Verifica se tem 11 dígitos
-        if (cpf.length() != 11) {
-            throw new ValidacaoDominioException("CPF deve ter 11 dígitos");
-        }
-
-        // Elimina CPFs com todos os dígitos iguais (ex: 00000000000, 11111111111, etc.)
         if (cpf.matches("(\\d)\\1{10}")) {
             throw new ValidacaoDominioException("CPF inválido por ter todos os dígitos iguais");
-        }
-
-        // Calcula o primeiro dígito verificador
-        int soma = 0;
-        for (int i = 0; i < 9; i++) {
-            soma += (cpf.charAt(i) - '0') * (10 - i);
-        }
-        int resto = 11 - (soma % 11);
-        int digito1 = (resto == 10 || resto == 11) ? 0 : resto;
-
-        // Calcula o segundo dígito verificador
-        soma = 0;
-        for (int i = 0; i < 10; i++) {
-            soma += (cpf.charAt(i) - '0') * (11 - i);
-        }
-        resto = 11 - (soma % 11);
-        int digito2 = (resto == 10 || resto == 11) ? 0 : resto;
-
-        // Confere se os dígitos calculados são iguais aos do CPF informado
-        boolean valido = digito1 == (cpf.charAt(9) - '0') && digito2 == (cpf.charAt(10) - '0');
-
-        if (!valido) {
-            throw new ValidacaoDominioException("CPF inválido");
         }
     }
 
@@ -191,7 +161,7 @@ public class Usuario {
 
     private void isTelefoneValido() {
         //regex para validar se telefone (xx)xxxxx-xxxx
-        final String regex = "^\\(\\d{2}\\) \\d{4,5}-\\d{4}$";
+        final String regex = "^\\\\+55\\\\d{10,11}$";
         if (!telefone.matches(regex)) {
             throw new ValidacaoDominioException("Telefone inválido, utilize o formato (DD)XXXXX-XXXX");
         }
