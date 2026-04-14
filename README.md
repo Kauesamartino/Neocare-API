@@ -1,3 +1,13 @@
+# Integrantes
+
+- Kaue Vinicius Samartino da Silva - 559317
+- João dos Santos Cardoso de Jesus - 560400
+- Davi Praxedes Santos - 560719
+
+## Link vídeo 
+
+https://youtu.be/BdNGmoQ4H9U
+
 # Neocare API — Sistema de Monitoramento de Estresse
 
 Neocare é uma plataforma completa de monitoramento de estresse e sinais vitais, desenvolvida com **Java 17**, **Spring Boot 3.5.6**, **Thymeleaf**, **Spring Security** (JWT + sessão) e **PostgreSQL**. O projeto segue os princípios da **Clean Architecture** com separação rigorosa de camadas.
@@ -242,4 +252,3 @@ Este projeto está licenciado sob a licença MIT — veja o arquivo LICENSE para
 
 ---
 
-Desenvolvido por Kauesamartino.
