@@ -34,13 +34,12 @@
 ## 🧩 1. Clonar o repositório
 
 ```bash
-git clone https://github.com/Kauesamartino/Neocare-API.git
-cd Neocare-API
+az login
 ```
 
 ---
 
-## ☁️ 2. Criar Resource Group
+## ☁️ 1. Criar Resource Group
 
 ```bash
 az group create \
@@ -50,7 +49,7 @@ az group create \
 
 ---
 
-## 📦 3. Criar Azure Container Registry (ACR)
+## 📦 2. Criar Azure Container Registry (ACR)
 
 ```bash
 az acr create \
@@ -80,7 +79,7 @@ docker buildx build \
 
 ---
 
-## 🌐 5. Criar ambiente do Container Apps
+## 🌐 6. Criar ambiente do Container Apps
 
 ```bash
 az containerapp env create \
@@ -91,7 +90,7 @@ az containerapp env create \
 
 ---
 
-## 🗄️ 6. Criar banco PostgreSQL
+## 🛢️ 7. Criar banco PostgreSQL
 
 ```bash
 az postgres flexible-server create \
@@ -99,7 +98,7 @@ az postgres flexible-server create \
   --resource-group neocare \
   --location canadacentral \
   --admin-user neocare_admin \
-  --admin-password <SENHA_SEGURA>
+  --admin-password 1508D@vi
 ```
 
 ---
