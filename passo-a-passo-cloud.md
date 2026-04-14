@@ -1,38 +1,33 @@
-# 🩺 Neocare API — Deploy no Azure + Datadog
+# 🩺 Neocare API — Deploy no Azure (Opcional: Datadog)
 
-> Deploy completo da Neocare API utilizando **Azure Container Apps**, **PostgreSQL** e observabilidade com **Datadog APM**.
+> Deploy completo da Neocare API utilizando **Azure Container Apps**, **PostgreSQL Flexible Server** e opcionalmente **Datadog APM**.
 
 ---
 
 ## 📋 Índice
 
-1. [Pré-requisitos](#-pré-requisitos)
-2. [Clonar o repositório](#-1-clonar-o-repositório)
-3. [Criar Resource Group](#-2-criar-resource-group)
-4. [Criar Azure Container Registry](#-3-criar-azure-container-registry-acr)
-5. [Build e Push da imagem Docker](#-4-build-e-push-da-imagem-docker)
-6. [Criar ambiente do Container Apps](#-5-criar-ambiente-do-container-apps)
-7. [Criar banco PostgreSQL](#-6-criar-banco-postgresql)
-8. [Segurança](#-7-segurança-importante)
-9. [Deploy da aplicação](#-8-deploy-da-aplicação)
-10. [Obter URL da aplicação](#-9-obter-url-da-aplicação)
-11. [Configurar Datadog APM](#-10-configurar-datadog-apm-java)
-12. [Observabilidade](#-11-observabilidade)
-13. [Limitações do ambiente](#-12-limitações-do-azure-container-apps)
-14. [Melhorias futuras](#-melhorias-futuras)
+1. Pré-requisitos
+2. Clonar repositório
+3. Criar Resource Group
+4. Criar Azure Container Registry
+5. Build e Push da imagem
+6. Criar ambiente Container Apps
+7. Criar banco PostgreSQL
+8. Liberar acesso ao banco (firewall)
+9. Criar database
+10. Deploy da aplicação
+11. Obter URL
+12. (Opcional) Datadog APM
+13. Observações importantes
 
 ---
 
 ## ✅ Pré-requisitos
 
-Antes de começar, certifique-se de ter:
-
-| Ferramenta | Descrição |
-|------------|-----------|
-| ☁️ Conta Azure | Acesso ao portal e permissões para criar recursos |
-| 🖥️ Azure CLI | Ferramenta de linha de comando (`az`) instalada |
-| 🐳 Docker | Para build e push da imagem da aplicação |
-| 📊 Conta Datadog | Com uma **API Key** válida |
+* Conta Azure
+* Azure CLI (`az`)
+* Docker com `buildx`
+* (Opcional) Conta Datadog
 
 ---
 
@@ -50,7 +45,7 @@ cd Neocare-API
 ```bash
 az group create \
   --name neocare \
-  --location brazilsouth
+  --location canadacentral
 ```
 
 ---
@@ -64,19 +59,23 @@ az acr create \
   --sku Basic
 ```
 
-### 🔐 Login no ACR
+### 🔐 Habilitar admin e login
 
 ```bash
+az acr update -n neocareapi --admin-enabled true
 az acr login --name neocareapi
 ```
 
 ---
 
-## 🐳 4. Build e Push da imagem Docker
+## 🐳 4. Build e Push da imagem (Mac M1/M2 compatível)
 
 ```bash
-docker build -t neocareapi.azurecr.io/neocare-api:v1 .
-docker push neocareapi.azurecr.io/neocare-api:v1
+docker buildx build \
+  --platform linux/amd64 \
+  -t neocareapi.azurecr.io/neocare-api:latest \
+  --push \
+  -f src/main/docker/Dockerfile .
 ```
 
 ---
@@ -90,8 +89,6 @@ az containerapp env create \
   --location canadacentral
 ```
 
-> Este ambiente será utilizado pelo Azure Container Apps como base para os deploys.
-
 ---
 
 ## 🗄️ 6. Criar banco PostgreSQL
@@ -100,55 +97,62 @@ az containerapp env create \
 az postgres flexible-server create \
   --name neocare-database \
   --resource-group neocare \
-  --location brazilsouth \
+  --location canadacentral \
   --admin-user neocare_admin \
   --admin-password <SENHA_SEGURA>
 ```
 
 ---
 
-## 🔐 7. Segurança (IMPORTANTE)
+## 🔓 7. Liberar acesso ao banco (Firewall aberto)
 
-> ⚠️ **Nunca exponha credenciais diretamente no código ou nos scripts.**
-
-Substitua os valores sensíveis pelos seus dados reais antes de executar:
-
+```bash
+az postgres flexible-server firewall-rule create \
+  --resource-group neocare \
+  --name neocare-database \
+  --rule-name allow-all \
+  --start-ip-address 0.0.0.0 \
+  --end-ip-address 255.255.255.255
 ```
-DD_API_KEY=<SUA_API_KEY>
-SPRING_DATASOURCE_PASSWORD=<SENHA_SEGURA>
-```
 
-### 💡 Recomendação
-
-Utilize o **Azure Key Vault** para gerenciar secrets de forma segura em produção.
+> ⚠️ **Atenção:** Isso libera acesso público total. Use apenas para testes.
 
 ---
 
-## 🚀 8. Deploy da aplicação
+## 🧱 8. Criar database `neocare`
+
+Conecte no banco e execute:
+
+```sql
+CREATE DATABASE neocare;
+```
+
+---
+
+## 🚀 9. Deploy da aplicação
 
 ```bash
 az containerapp create \
   --name neocare-api \
   --resource-group neocare \
   --environment neocare-env \
-  --image neocareapi.azurecr.io/neocare-api:v1 \
+  --image neocareapi.azurecr.io/neocare-api:latest \
+  --registry-server neocareapi.azurecr.io \
+  --registry-username <ACR_USERNAME> \
+  --registry-password <ACR_PASSWORD> \
   --target-port 8080 \
   --ingress external \
-  --registry-server neocareapi.azurecr.io \
+  --cpu 0.5 \
+  --memory 1Gi \
   --env-vars \
-    DD_SERVICE=neocare-api \
-    DD_ENV=dev \
-    DD_VERSION=1.0 \
-    DD_SITE=datadoghq.com \
-    DD_API_KEY=<SUA_API_KEY> \
     SPRING_DATASOURCE_URL="jdbc:postgresql://neocare-database.postgres.database.azure.com:5432/neocare?sslmode=require" \
     SPRING_DATASOURCE_USERNAME="neocare_admin" \
-    SPRING_DATASOURCE_PASSWORD=<SENHA_SEGURA>
+    SPRING_DATASOURCE_PASSWORD="<SENHA_SEGURA>"
 ```
 
 ---
 
-## 🔍 9. Obter URL da aplicação
+## 🔍 10. Obter URL da aplicação
 
 ```bash
 az containerapp show \
@@ -159,15 +163,25 @@ az containerapp show \
 
 ---
 
-## 📊 10. Configurar Datadog APM (Java)
+## 📊 11. (Opcional) Datadog APM
 
-### No `Dockerfile`, adicionar o agente Java:
+### Variáveis adicionais no deploy:
+
+```bash
+DD_SERVICE=neocare-api
+DD_ENV=dev
+DD_VERSION=1.0
+DD_SITE=datadoghq.com
+DD_API_KEY=<SUA_API_KEY>
+```
+
+### No Dockerfile:
 
 ```dockerfile
 ADD https://dtdg.co/latest-java-tracer /dd-java-agent.jar
 ```
 
-### Na execução da aplicação, incluir o flag:
+### Na execução Java:
 
 ```
 -javaagent:/dd-java-agent.jar
@@ -175,72 +189,42 @@ ADD https://dtdg.co/latest-java-tracer /dd-java-agent.jar
 
 ---
 
-## 🧠 11. Observabilidade
+## 🧠 Observações importantes
 
-As seguintes variáveis de ambiente são utilizadas para configurar o rastreamento no Datadog:
+* ❗ Evite expor:
 
-| Variável | Descrição |
-|----------|-----------|
-| `DD_SERVICE` | Nome do serviço monitorado |
-| `DD_ENV` | Ambiente (`dev`, `staging`, `prod`) |
-| `DD_VERSION` | Versão do deploy |
-
-Essas variáveis permitem:
-
-- 📂 Organização dos serviços no Datadog
-- 🔍 Rastreamento de deploys por versão
-- 📈 Análise de performance por ambiente
+  * Senhas
+  * API Keys
+* ✅ Use **Azure Key Vault** em produção
+* ⚠️ Firewall aberto é apenas para ambiente de teste
+* 🧱 Container Apps não suporta docker.sock (limitação do ambiente)
 
 ---
 
-## ⚠️ 12. Limitações do Azure Container Apps
-
-| Recurso | Status |
-|---------|--------|
-| Acesso ao `docker.sock` | ❌ Não disponível |
-| Autodiscovery de containers | ❌ Não suportado |
-| APM (tracing com `dd-java-agent`) | ✅ Funciona perfeitamente |
-| Métricas de infraestrutura | ⚠️ Limitadas |
-
----
-
-## 🧾 Resumo do fluxo
+## 🧾 Fluxo resumido
 
 ```
-1. Clonar repositório
-2. Criar Resource Group
-3. Criar ACR
-4. Build e push da imagem
-5. Criar ambiente Container Apps
-6. Criar banco PostgreSQL
-7. Configurar variáveis de ambiente
-8. Deploy da aplicação
-9. Acessar via URL pública
-10. Monitorar com Datadog
+1. Criar RG
+2. Criar ACR
+3. Build + Push imagem
+4. Criar ambiente
+5. Criar PostgreSQL
+6. Liberar firewall
+7. Criar database
+8. Deploy Container App
+9. Acessar URL
 ```
 
 ---
 
 ## ✅ Resultado esperado
 
-Ao final do processo, você terá:
-
-- 🌐 Aplicação disponível via **URL pública**
-- 🗄️ Banco de dados **PostgreSQL conectado**
-- 📊 **Traces visíveis** no painel do Datadog
-- 🛠️ Ambiente pronto para **desenvolvimento e testes**
-
----
-
-## 💡 Melhorias futuras
-
-- [ ] Uso do **Azure Key Vault** para gerenciamento de secrets
-- [ ] Pipeline de **CI/CD com GitHub Actions**
-- [ ] Infraestrutura como código com **Terraform**
-- [ ] Monitoramento avançado: **logs + métricas + alertas**
+* 🌐 API pública funcionando
+* 🗄️ PostgreSQL conectado
+* 📊 (Opcional) Traces no Datadog
 
 ---
 
 <p align="center">
-  Feito com ☕ e muita <strong>resiliência</strong> 🚀
+  Deploy feito com ☕ + sofrimento em cloud 🚀
 </p>
