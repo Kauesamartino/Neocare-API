@@ -9,6 +9,8 @@ import java.time.LocalDate;
  */
 public class UsuarioOutputDTO {
 
+    private Long id;
+
     private String nome;
 
     private String sobrenome;
@@ -31,7 +33,8 @@ public class UsuarioOutputDTO {
 
     private Boolean ativo;
 
-    public UsuarioOutputDTO(String nome, String sobrenome, String cpf, String email, String telefone, LocalDate dataNascimento, Sexo sexo, Integer altura, Double peso, EnderecoOutputDTO endereco, Boolean ativo) {
+    public UsuarioOutputDTO(Long id, String nome, String sobrenome, String cpf, String email, String telefone, LocalDate dataNascimento, Sexo sexo, Integer altura, Double peso, EnderecoOutputDTO endereco, Boolean ativo) {
+        this.id = id;
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.cpf = cpf;
@@ -43,6 +46,10 @@ public class UsuarioOutputDTO {
         this.peso = peso;
         this.endereco = endereco;
         this.ativo = ativo;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getNome() {
